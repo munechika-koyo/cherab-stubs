@@ -18,8 +18,8 @@ from .rates import (
     ThermalCXPEC,
     ThermalCXRate,
     TotalRadiatedPower,
-    ZeemanStructure,
 )
+from .zeeman import ZeemanStructure
 
 class AtomicData:
     """Atomic data source abstraction layer.
@@ -41,39 +41,27 @@ class AtomicData:
         """Recombination rate for a given species in m^3/s."""
 
     @abstractmethod
-    def thermal_cx_rate(
-        self, donor_ion: Element, donor_charge: int, receiver_ion: Element, receiver_charge: int
-    ) -> ThermalCXRate:
+    def thermal_cx_rate(self, donor_ion: Element, donor_charge: int, receiver_ion: Element, receiver_charge: int) -> ThermalCXRate:
         """Thermal charge exchange effective rate coefficient for a given donor and receiver species in m^3/s."""
 
     @abstractmethod
-    def list_beam_cx_pec(
-        self, donor_ion: Element, receiver_ion: Element, receiver_charge: int, transition: tuple
-    ) -> list[BeamEmissionPEC]:
+    def list_beam_cx_pec(self, donor_ion: Element, receiver_ion: Element, receiver_charge: int, transition: tuple) -> list[BeamEmissionPEC]:
         """A list of Effective charge exchange photon emission coefficient for a given donor (beam) in W.m^3."""
 
     @abstractmethod
-    def beam_stopping_rate(
-        self, beam_ion: Element, plasma_ion: Element, charge: int
-    ) -> BeamStoppingRate:
+    def beam_stopping_rate(self, beam_ion: Element, plasma_ion: Element, charge: int) -> BeamStoppingRate:
         """Beam stopping coefficient for a given beam and target species in m^3/s."""
 
     @abstractmethod
-    def beam_population_rate(
-        self, beam_ion: Element, metastable: int, plasma_ion: Element, charge: int
-    ) -> BeamPopulationRate:
+    def beam_population_rate(self, beam_ion: Element, metastable: int, plasma_ion: Element, charge: int) -> BeamPopulationRate:
         """Dimensionless Beam population coefficient for a given beam and target species."""
 
     @abstractmethod
-    def beam_emission_pec(
-        self, beam_ion: Element, plasma_ion: Element, charge: int, transition: tuple
-    ) -> BeamEmissionPEC:
+    def beam_emission_pec(self, beam_ion: Element, plasma_ion: Element, charge: int, transition: tuple) -> BeamEmissionPEC:
         """The beam photon emission coefficient for a given beam and target species and a given transition in W.m^3."""
 
     @abstractmethod
-    def impact_excitation_pec(
-        self, ion: Element, charge: int, transition: tuple
-    ) -> ImpactExcitationPEC:
+    def impact_excitation_pec(self, ion: Element, charge: int, transition: tuple) -> ImpactExcitationPEC:
         """Electron impact excitation photon emission coefficient for a given species in W.m^3."""
 
     @abstractmethod
