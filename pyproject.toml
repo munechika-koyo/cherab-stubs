@@ -1,0 +1,89 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cherab-stubs"
+description = "Type annotations for cherab"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "BSD-3-Clause"
+authors = [{ name = "Koyo Munechika", email = "munechika.koyo@gmail.com" }]
+keywords = ["type-stubs", "mypy", "cherab", "ray-tracing"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Stubs Only",
+]
+dependencies = ["raysect-stubs"]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/munechika-koyo/cherab-stubs"
+Repository = "https://github.com/munechika-koyo/cherab-stubs"
+Issues = "https://github.com/munechika-koyo/cherab-stubs/issues"
+
+# ----------------------
+# === Version config ===
+# ----------------------
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.metadata.hooks.vcs]
+
+# ----------------------------
+# === Build/Package config ===
+# ----------------------------
+[tool.hatch.build.targets.wheel]
+packages = ["src/cherab-stubs"]
+
+# ------------------------------
+# === Type checking settings ===
+# ------------------------------
+[tool.mypy]
+strict = true
+warn_unreachable = false
+
+[tool.pyrefly]
+project-includes = ["src"]
+
+# ------------------------------
+# === Lint & Format settings ===
+# ------------------------------
+[tool.ruff]
+line-length = 200
+include = ["*.py", "*.pyi"]
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint]
+select = [
+  "E",  # pycodestyle errors
+  "W",  # pycodestyle warnings
+  "F",  # pyflakes
+  "I",  # isort
+  "B",  # flake8-bugbear
+  "C4", # flake8-comprehensions
+  "UP", # pyupgrade
+]
+ignore = [
+  "E501", # line too long, handled by formatter
+  "F403", # 'from module import *' used; unable to detect undefined names
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["cherab"]
+split-on-trailing-comma = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]

@@ -1,0 +1,104 @@
+[workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+preview = ["pixi-build"]
+
+# -------------------------------
+# === Packaging Configuration ===
+# -------------------------------
+[package]
+version = "dynamic" # Until pixi recommends something else
+
+[package.build]
+backend = { name = "pixi-build-python", version = "*" }
+
+[package.build.config]
+noarch = true
+
+[package.host-dependencies]
+uv = "*"
+python = ">=3.10"
+hatchling = "*"
+hatch-vcs = "*"
+
+[package.run-dependencies]
+raysect-stubs = "*"
+
+# ---------------------------------
+# === Development Configuration ===
+# ---------------------------------
+[dependencies]
+cherab-stubs = { path = "." }
+cherab = "*"
+pytest = "*"
+mypy = "*"
+ipython = ">=8.37.0,<10"
+
+[tasks]
+# Testing and type checking
+test = "pytest tests/"
+type-check = "mypy cherab-stubs/"
+
+# Type stub generation
+typegen = { cmd = [
+  "stubgen",
+  "-p",
+  "cherab",
+  "-o",
+  "stubgen_temp",
+  "--ignore-errors",
+  "--include-private",
+  "--include-docstrings",
+], description = "📝 Generate type stubs for cherab" }
+
+typegen-update = { cmd = [
+  "rm",
+  "-rf",
+  "src/cherab-stubs/*",
+  "&&",
+  "mv",
+  "stubgen_temp/cherab/*",
+  "src/cherab-stubs/",
+], description = "📝 Update type stubs for cherab" }
+
+# === Linting feature ===
+[feature.lint.dependencies]
+dprint = "*"
+lefthook = "*"
+ruff = "*"
+typos = "*"
+mypy = "*"
+pyrefly = "*"
+actionlint = "*"
+shellcheck = "*"
+validate-pyproject = "*"
+blacken-docs = "*"
+taplo = "*"
+
+[feature.lint.tasks]
+lefthook = { cmd = "lefthook", description = "🔗 Run lefthook" }
+hooks = { cmd = "lefthook install", description = "🔗 Install pre-commit hooks" }
+pre-commit = { cmd = "lefthook run pre-commit", description = "🔗 Run pre-commit checks" }
+mypy = { cmd = "mypy", description = "Type check with mypy" }
+pyrefly-check = { cmd = "pyrefly check", description = "Type check with pyrefly" }
+ruff-check = { cmd = "ruff check --fix", description = "Lint with ruff" }
+ruff-format = { cmd = "ruff format", description = "Format with ruff" }
+dprint = { cmd = "dprint fmt", description = "Format with dprint" }
+typos = { cmd = "typos --write-changes --force-exclude", description = "Fix typos" }
+taplo = { cmd = "taplo fmt", description = "Format toml files with taplo" }
+actionlint = { cmd = "actionlint", description = "Lint actions with actionlint" }
+blacken-docs = { cmd = "blacken-docs", description = "Format Python markdown blocks with Black" }
+validate-pyproject = { cmd = "validate-pyproject pyproject.toml", description = "Validate pyproject.toml" }
+lint = { cmd = "lefthook run pre-commit --all-files --force", description = "🧹 Run all linters" }
+
+# === Python environment features ===
+[feature.pyoldest.dependencies]
+python = "3.10.*"
+[feature.pylatest.dependencies]
+python = "3.14.*"
+
+[environments]
+default = { features = ["pylatest"], solve-group = "pylatest" }
+pylatest = { features = ["pylatest"], solve-group = "pylatest" }   # alias of test
+pyoldest = { features = ["pyoldest"], solve-group = "pyoldest" }
+lint = { features = ["lint"], no-default-feature = true }
