@@ -1,0 +1,6 @@
+from .interpolators1d import Interpolate1DCubic as Interpolate1DCubic
+from .interpolators1d import Interpolate1DLinear as Interpolate1DLinear
+from .interpolators2d import Interpolate2DCubic as Interpolate2DCubic
+from .interpolators2d import Interpolate2DLinear as Interpolate2DLinear
+from .interpolators3d import Interpolate3DCubic as Interpolate3DCubic
+from .interpolators3d import Interpolate3DLinear as Interpolate3DLinear
