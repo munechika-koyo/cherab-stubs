@@ -54,10 +54,10 @@ typegen = { cmd = [
 typegen-update = { cmd = [
   "rm",
   "-rf",
-  "src/cherab-stubs/*",
+  "src/cherab-stubs/",
   "&&",
   "mv",
-  "stubgen_temp/cherab/*",
+  "stubgen_temp/cherab/",
   "src/cherab-stubs/",
 ], description = "📝 Update type stubs for cherab" }
 
@@ -99,6 +99,6 @@ python = "3.14.*"
 
 [environments]
 default = { features = ["pylatest"], solve-group = "pylatest" }
-pylatest = { features = ["pylatest"], solve-group = "pylatest" }   # alias of test
+pylatest = { features = ["pylatest"], solve-group = "pylatest" } # alias of test
 pyoldest = { features = ["pyoldest"], solve-group = "pyoldest" }
-lint = { features = ["lint"], no-default-feature = true }
+lint = ["lint", "default"]
