@@ -22,7 +22,7 @@ hatchling = "*"
 hatch-vcs = "*"
 
 [package.run-dependencies]
-raysect-stubs = "*"
+raysect-stubs = { git = "https://github.com/munechika-koyo/raysect-stubs.git" }
 
 # ---------------------------------
 # === Development Configuration ===
