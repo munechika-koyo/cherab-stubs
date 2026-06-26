@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "cherab-stubs"
 description = "Type annotations for cherab"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "BSD-3-Clause"
 authors = [{ name = "Koyo Munechika", email = "munechika.koyo@gmail.com" }]
 keywords = ["type-stubs", "mypy", "cherab", "ray-tracing"]
@@ -14,7 +14,6 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",

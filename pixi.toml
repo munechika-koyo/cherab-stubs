@@ -17,12 +17,15 @@ noarch = true
 
 [package.host-dependencies]
 uv = "*"
-python = ">=3.10"
+python = ">=3.11"
 hatchling = "*"
 hatch-vcs = "*"
 
 [package.run-dependencies]
 raysect-stubs = { git = "https://github.com/munechika-koyo/raysect-stubs.git" }
+
+[package.run-constraints]
+cherab = ">=1.5.0,<1.6.0"
 
 # ---------------------------------
 # === Development Configuration ===
@@ -36,7 +39,7 @@ ipython = ">=8.37.0,<10"
 
 [tasks]
 # Testing and type checking
-test = "pytest tests/"
+test = "stubtest --ignore-disjoint-bases cherab"
 type-check = "mypy cherab-stubs/"
 
 # Type stub generation
@@ -93,7 +96,7 @@ lint = { cmd = "lefthook run pre-commit --all-files --force", description = "ðŸ§
 
 # === Python environment features ===
 [feature.pyoldest.dependencies]
-python = "3.10.*"
+python = "3.11.*"
 [feature.pylatest.dependencies]
 python = "3.14.*"
 
