@@ -16,8 +16,7 @@ backend = { name = "pixi-build-python", version = "*" }
 noarch = true
 
 [package.host-dependencies]
-uv = "*"
-python = ">=3.11"
+python = ">=3.10"
 hatchling = "*"
 hatch-vcs = "*"
 
@@ -38,8 +37,6 @@ mypy = "*"
 ipython = ">=8.37.0,<10"
 
 [tasks]
-# Testing and type checking
-test = "stubtest --ignore-disjoint-bases cherab"
 type-check = "mypy cherab-stubs/"
 
 # Type stub generation
@@ -63,6 +60,22 @@ typegen-update = { cmd = [
   "stubgen_temp/cherab/",
   "src/cherab-stubs/",
 ], description = "📝 Update type stubs for cherab" }
+
+[feature.test.dependencies]
+mypy = "*"
+pytest = "*"
+cherab = "*"
+
+[feature.test.pypi-dependencies]
+cherab-stubs = { path = ".", editable = false }
+
+[feature.test.tasks]
+test-regression = { cmd = "pytest -q tests/test_stubs.py", description = "Run regression tests for the stubs" }
+test-stubtest = { cmd = "stubtest --allowlist=.mypyignore --ignore-disjoint-bases cherab", description = "Check stubs against the Cherab runtime" }
+test = { depends-on = [
+  "test-regression",
+  "test-stubtest",
+], description = "Run all stub tests" }
 
 # === Linting feature ===
 [feature.lint.dependencies]
@@ -94,14 +107,31 @@ blacken-docs = { cmd = "blacken-docs", description = "Format Python markdown blo
 validate-pyproject = { cmd = "validate-pyproject pyproject.toml", description = "Validate pyproject.toml" }
 lint = { cmd = "lefthook run pre-commit --all-files --force", description = "🧹 Run all linters" }
 
+# === Build feature ===
+[feature.build.dependencies]
+python-build = "*"
+
+[feature.build.dev]
+raysect-stubs = { path = "." }
+
+[feature.build.tasks]
+build-wheel = { cmd = "python -m build -nx -w", description = "🔧 Build wheel distribution" }
+build-sdist = { cmd = "python -m build -nx -s", description = "🔧 Build source distribution" }
+
 # === Python environment features ===
-[feature.pyoldest.dependencies]
-python = "3.11.*"
-[feature.pylatest.dependencies]
+[feature.py-oldest.dependencies]
+python = "3.10.*"
+[feature.py-latest.dependencies]
 python = "3.14.*"
 
 [environments]
-default = { features = ["pylatest"], solve-group = "pylatest" }
-pylatest = { features = ["pylatest"], solve-group = "pylatest" } # alias of test
-pyoldest = { features = ["pyoldest"], solve-group = "pyoldest" }
+default = { features = ["py-latest"], solve-group = "py-latest" }
+py-latest = { features = [
+  "py-latest",
+], solve-group = "py-latest" } # alias of test
+py-oldest = { features = ["py-oldest"], solve-group = "py-oldest" }
+test = { features = ["test"], no-default-feature = true }
+test-pylatest = { features = ["test", "py-latest"], no-default-feature = true }
+test-pyoldest = { features = ["test", "py-oldest"], no-default-feature = true }
 lint = ["lint", "default"]
+build = { features = ["build"], no-default-feature = true }
