@@ -21,7 +21,9 @@ hatchling = "*"
 hatch-vcs = "*"
 
 [package.run-dependencies]
+numpy = "*"
 raysect-stubs = { git = "https://github.com/munechika-koyo/raysect-stubs.git" }
+typing-extensions = { version = ">=4.6", when = "python <3.12" }
 
 [package.run-constraints]
 cherab = ">=1.5.0,<1.6.0"
@@ -37,7 +39,7 @@ mypy = "*"
 ipython = ">=8.37.0,<10"
 
 [tasks]
-type-check = "mypy cherab-stubs/"
+type-check = "mypy src/cherab-stubs/"
 
 # Type stub generation
 typegen = { cmd = [
@@ -112,7 +114,7 @@ lint = { cmd = "lefthook run pre-commit --all-files --force", description = "ðŸ§
 python-build = "*"
 
 [feature.build.dev]
-raysect-stubs = { path = "." }
+cherab-stubs = { path = "." }
 
 [feature.build.tasks]
 build-wheel = { cmd = "python -m build -nx -w", description = "ðŸ”§ Build wheel distribution" }
