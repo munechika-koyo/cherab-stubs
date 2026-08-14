@@ -1,0 +1,25 @@
+# Cherab test files
+cherab\.((_|\w)+\.)+(__test__|test|tests(\..+)?)
+
+# Cython-generated implementation details are not part of the public Python API.
+cherab(\.\w+)+\.(__pyx_capi__|__pyx_vtable__|__pyx_unpickle_\w+|__(reduce|setstate)_cython__)
+
+# Cython classes without a Python-level constructor expose an uninformative
+# runtime signature of (*args, **kwargs); the stubs intentionally keep the
+# documented no-argument constructor instead.
+cherab\.core\.atomic\.gaunt\.MaxwellianFreeFreeGauntFactor\.__init__
+cherab\.core\.beam\.model\.(BeamAttenuator|BeamModel)\.__init__
+cherab\.core\.beam\.node\.ModelManager\.__init__
+cherab\.core\.distribution\.(DistributionFunction|ZeroDistribution)\.__init__
+cherab\.core\.laser\.model\.LaserModel\.__init__
+cherab\.core\.laser\.node\.ModelManager\.__init__
+cherab\.core\.laser\.profile\.LaserProfile\.__init__
+cherab\.core\.model\.laser\.profile\.ConstantAxisymmetricGaussian\.__init__
+cherab\.core\.plasma\.node\.(Composition|ModelManager)\.__init__
+cherab\.openadas\.rates\.cx\.NullBeamCXPEC\.__init__
+
+# Implementation-only private names. Documented subclass hooks remain covered by regression tests.
+cherab(\.\w+)*\._(?!_)\w+(\.\w+)*
+
+# Optional/helper modules that are not importable in the supported runtime wheel.
+cherab\.core\.math\.caching\.utility
