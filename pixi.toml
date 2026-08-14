@@ -32,14 +32,16 @@ cherab = ">=1.5.0,<1.6.0"
 # === Development Configuration ===
 # ---------------------------------
 [dependencies]
-cherab-stubs = { path = "." }
 cherab = "*"
 pytest = "*"
 mypy = "*"
 ipython = ">=8.37.0,<10"
 
+[pypi-dependencies]
+cherab-stubs = { path = ".", editable = false }
+
 [tasks]
-type-check = "mypy src/cherab-stubs/"
+type-check = "mypy --strict --no-incremental -p cherab"
 
 # Type stub generation
 typegen = { cmd = [
