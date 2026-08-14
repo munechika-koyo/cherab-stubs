@@ -33,7 +33,6 @@ cherab = ">=1.5.0,<1.6.0"
 # ---------------------------------
 [dependencies]
 cherab = "*"
-pytest = "*"
 mypy = "*"
 ipython = ">=8.37.0,<10"
 
@@ -66,12 +65,7 @@ typegen-update = { cmd = [
 ], description = "📝 Update type stubs for cherab" }
 
 [feature.test.dependencies]
-mypy = "*"
 pytest = "*"
-cherab = "*"
-
-[feature.test.pypi-dependencies]
-cherab-stubs = { path = ".", editable = false }
 
 [feature.test.tasks]
 test-regression = { cmd = "pytest -q tests/test_stubs.py", description = "Run regression tests for the stubs" }
@@ -134,8 +128,8 @@ py-latest = { features = [
   "py-latest",
 ], solve-group = "py-latest" } # alias of test
 py-oldest = { features = ["py-oldest"], solve-group = "py-oldest" }
-test = { features = ["test"], no-default-feature = true }
-test-pylatest = { features = ["test", "py-latest"], no-default-feature = true }
-test-pyoldest = { features = ["test", "py-oldest"], no-default-feature = true }
+test = ["test", "default"]
+test-pylatest = ["test", "py-latest"]
+test-pyoldest = ["test", "py-oldest"]
 lint = ["lint", "default"]
 build = { features = ["build"], no-default-feature = true }
