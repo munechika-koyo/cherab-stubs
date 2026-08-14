@@ -7,7 +7,7 @@ from raysect.optical import Ray, Spectrum, World
 from raysect.optical.material.emitter import InhomogeneousVolumeEmitter
 
 class RadiationFunction(InhomogeneousVolumeEmitter):
-    """
+    r"""
     A general purpose radiation material.
 
     Radiates power over 4 pi according to the supplied 3D radiation
@@ -23,7 +23,7 @@ class RadiationFunction(InhomogeneousVolumeEmitter):
     evaluation takes place in the correct coordinate system.
 
     :param Function3D radiation_function: A 3D radiation function that specifies the amount of radiation
-      to be radiated at a given point, :math:`\\phi(x, y, z)` [W/m^3].
+      to be radiated at a given point, :math:`\phi(x, y, z)` [W/m^3].
     :param float step: The scale length for integration of the radiation function.
 
     .. code-block:: pycon

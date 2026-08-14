@@ -11,7 +11,7 @@ hydrogen: Element
 tritium: Isotope
 
 class TotalRadiatedPower(PlasmaModel):
-    """
+    r"""
     Emitter that calculates total power radiated by a given ion, which includes:
 
     - line power due to electron impact excitation,
@@ -23,18 +23,18 @@ class TotalRadiatedPower(PlasmaModel):
     observable spectral range.
 
     .. math::
-        \\epsilon_{\\mathrm{total}} = \\frac{1}{4 \\pi \\Delta\\lambda} \\left(
-        n_{Z_\\mathrm{i}} n_\\mathrm{e} C_{\\mathrm{excit}}(n_\\mathrm{e}, T_\\mathrm{e}) +
-        n_{Z_\\mathrm{i} + 1} n_\\mathrm{e} C_{\\mathrm{recomb}}(n_\\mathrm{e}, T_\\mathrm{e}) +
-        n_{Z_\\mathrm{i} + 1} n_\\mathrm{hyd} C_{\\mathrm{cx}}(n_\\mathrm{e}, T_\\mathrm{e}) \\right)
+        \epsilon_{\mathrm{total}} = \frac{1}{4 \pi \Delta\lambda} \left(
+        n_{Z_\mathrm{i}} n_\mathrm{e} C_{\mathrm{excit}}(n_\mathrm{e}, T_\mathrm{e}) +
+        n_{Z_\mathrm{i} + 1} n_\mathrm{e} C_{\mathrm{recomb}}(n_\mathrm{e}, T_\mathrm{e}) +
+        n_{Z_\mathrm{i} + 1} n_\mathrm{hyd} C_{\mathrm{cx}}(n_\mathrm{e}, T_\mathrm{e}) \right)
 
-    where :math:`n_{Z_\\mathrm{i}}` is the target species density;
-    :math:`n_{Z_\\mathrm{i} + 1}` is the recombining species density;
-    :math:`n_{\\mathrm{hyd}}` is the total density of all hydrogen isotopes;
-    :math:`C_{\\mathrm{excit}}, C_{\\mathrm{recomb}}, C_{\\mathrm{cx}}` are the radiated power
+    where :math:`n_{Z_\mathrm{i}}` is the target species density;
+    :math:`n_{Z_\mathrm{i} + 1}` is the recombining species density;
+    :math:`n_{\mathrm{hyd}}` is the total density of all hydrogen isotopes;
+    :math:`C_{\mathrm{excit}}, C_{\mathrm{recomb}}, C_{\mathrm{cx}}` are the radiated power
     coefficients in :math:`W m^3` due to electron impact excitation, recombination
     + Bremsstrahlung and charge exchange with thermal neutral hydrogen, respectively;
-    :math:`\\Delta\\lambda` is the observable spectral range.
+    :math:`\Delta\lambda` is the observable spectral range.
 
     :param Element element: The atomic element/isotope.
     :param int charge: The charge state of the element/isotope.

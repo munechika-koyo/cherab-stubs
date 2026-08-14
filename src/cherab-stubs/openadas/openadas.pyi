@@ -107,9 +107,9 @@ class OpenADAS(AtomicData):
         Open-ADAS data is interpolated with cubic spline in log-log space.
         Linear extrapolation is used when permit_extrapolation is True.
 
-        :param donor_ion: Element object defining the donor ion type.
+        :param donor_element: Element object defining the donor ion type.
         :param donor_charge: Charge state of the donor ion.
-        :param receiver_ion: Element object defining the receiver ion type.
+        :param receiver_element: Element object defining the receiver ion type.
         :param receiver_charge: Charge state of the receiver ion.
         :return: Thermal charge exchange rate in m^3/s as a function of electron density and
                  temperature.

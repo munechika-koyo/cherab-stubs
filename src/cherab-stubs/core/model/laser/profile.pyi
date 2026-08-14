@@ -23,10 +23,10 @@ class UniformEnergyDensity(LaserProfile):
        >>> from raysect.core import Vector3D
        >>> from cherab.core.model.laser import UniformEnergyDensity
 
-       >>> energy = 5 # energy density in J
-       >>> radius = 3e-2 # laser radius in m
-       >>> length = 2 # laser length in m
-       >>> polarisation = Vector3D(0, 1, 0) # polarisation direction
+       >>> energy = 5  # energy density in J
+       >>> radius = 3e-2  # laser radius in m
+       >>> length = 2  # laser length in m
+       >>> polarisation = Vector3D(0, 1, 0)  # polarisation direction
 
            # create the laser profile
        >>> laser_profile = UniformEnergyDensity(energy, radius, length, polarisation)
@@ -66,7 +66,7 @@ class ConstantAxisymmetricGaussian(LaserProfile):
     def __init__(self) -> None: ...
 
 class ConstantBivariateGaussian(LaserProfile):
-    """
+    r"""
     LaserProfile with a Gaussian-shaped volumetric energy density distribution in the xy plane
     and constant pulse intensity.
 
@@ -77,15 +77,15 @@ class ConstantBivariateGaussian(LaserProfile):
     uniform. The integral value of laser energy Exy in an x-y plane is given by
 
     .. math::
-         E_{xy} = \\frac{E_p}{(c * \\tau)},
+        E_{xy} = \frac{E_\mathrm{p}}{(c \cdot \tau)},
 
-    where Ep is the energy of the laser pulse, tau is the temporal pulse length and c is the speed of light in vacuum.
+    where :math:`E_\mathrm{p}` is the energy of the laser pulse, :math:`\tau` is the temporal pulse length and :math:`c` is the speed of light in vacuum.
     In an x-y plane, the volumetric energy density follows a bivariate Gaussian with a zero correlation:
 
     .. math::
-         E(x, y) = \\frac{E_{xy}}{2 \\pi \\sigma_x \\sigma_y} exp\\left(-\\frac{x^2 + y^2}{2 \\sigma_x \\sigma_y}\\right).
+        E(x, y) = \frac{E_{xy}}{2 \pi \sigma_x \sigma_y} \exp\left(-\frac{x^2}{2 \sigma_x^2} - \frac{y^2}{2 \sigma_y^2}\right).
 
-    The sigma_x and sigma_y are standard deviations in x and y directions, respectively.
+    The :math:`\sigma_x` and :math:`\sigma_y` are standard deviations in x and y directions, respectively.
 
     .. note::
         The height of the cylinder, forming the laser beam, is given by the laser_length and is independent from the
@@ -97,7 +97,7 @@ class ConstantBivariateGaussian(LaserProfile):
         return non-zero values.
 
 
-    The following example shows how to create a laser with sigma_x= 1 cm and sigma_y=2 cm, which makes the laser
+    The following example shows how to create a laser with :math:`\sigma_x= 1` cm and :math:`\sigma_y=2` cm, which makes the laser
     profile in x-y plane to be elliptical. The pulse energy is 5 J and the laser temporal pulse length is 10 ns:
 
     .. code-block:: pycon
@@ -171,36 +171,36 @@ class ConstantBivariateGaussian(LaserProfile):
     @stddev_y.setter
     def stddev_y(self, value: float) -> None: ...
     def _function_changed(self) -> None:
-        """
-        Energy density should be returned in units [J/m ** 3]. Energy shape in xy
-        plane is defined by normal distribution (integral over xy plane for
+        """Energy density should be returned in units [J/m ** 3].
+
+        Energy shape in xy plane is defined by normal distribution (integral over xy plane for
         constant z is 1). The units of such distribution are [m ** -2].
         In the z axis direction (direction of laser propagation),
         the laser_energy is spread along the z axis using the velocity
         of light SPEED_OF_LIGHT and the temporal duration of the pulse:
         length = SPEED_OF_LIGHT * pulse_length. Combining the normal distribution with the normalisation
-         pulse_energy / length gives the units [J / m ** 3].
+        pulse_energy / length gives the units [J / m ** 3].
         """
     def generate_geometry(self) -> list[Cylinder]: ...
 
 class TrivariateGaussian(LaserProfile):
-    """
+    r"""
     LaserProfile with a trivariate Gaussian-shaped volumetric energy density.
 
     Returns a laser with a cylindrical shape and the propagation of the laser light in the positive z direction.
     This model imitates a laser beam with a Gaussian distribution of power output within a single pulse frozen in time:
 
     .. math::
-         E(x, y, z) = \\frac{E_p}{\\sqrt{2 \\pi^3} \\sigma_x \\sigma_y \\sigma_z} exp\\left(-\\frac{x^2}{2 \\sigma_x^2} -\\frac{y^2}{2 \\sigma_y^2} -\\frac{(z - \\mu_z)^2}{2 \\sigma_z^2}\\right).
+        E(x, y, z) = \frac{E_\mathrm{p}}{\sqrt{2 \pi^3} \sigma_x \sigma_y \sigma_z} \exp\left(-\frac{x^2}{2 \sigma_x^2} -\frac{y^2}{2 \sigma_y^2} -\frac{(z - \mu_z)^2}{2 \sigma_z^2}\right).
 
 
-    The sigma_x and sigma_y are standard deviations in x and y directions, respectively, and E_p is the energy delivered by laser in a
-    single laser pulse. The mu_z is the mean of the distribution in the z direction and controls th position of the laser pulse along the z direction.
-    The standard deviation in z direction sigma_z is calculated from the pulse length tau_p, which is the
+    The :math:`\sigma_x` and :math:`\sigma_y` are standard deviations in x and y directions, respectively, and :math:`E_\mathrm{p}` is the energy delivered by laser in a
+    single laser pulse. The :math:`\mu_z` is the mean of the distribution in the z direction and controls the position of the laser pulse along the z direction.
+    The standard deviation in z direction :math:`\sigma_z` is calculated from the pulse length :math:`\tau_p`, which is the
     standard deviation of the Gaussian distributed output power of the laser within a single pulse:
 
     .. math::
-         \\sigma_z = \\tau_p c.
+        \sigma_z = \tau_p c.
 
     The c stands for the speed of light in vacuum.
 
@@ -214,14 +214,14 @@ class TrivariateGaussian(LaserProfile):
         return non-zero values.
 
 
-    The following example shows how to create a laser with sigma_x = 1 cm and sigma_y = 2 cm, which makes the laser
+    The following example shows how to create a laser with :math:`\sigma_x = 1` cm and :math:`\sigma_y = 2` cm, which makes the laser
     profile in an x-y plane to be elliptical. The pulse energy is 5 J and the laser temporal pulse length is 10 ns.
     The position of the laser pulse maximum mean_z is set to 0.5:
 
     .. code-block:: pycon
 
        >>> from raysect.core import Vector3D
-       >>> from cherab.core.model.laser import ConstantBivariateGaussian
+       >>> from cherab.core.model.laser import TrivariateGaussian
 
        >>> radius = 3e-2 # laser radius in m
        >>> length = 2 # laser length in m
@@ -233,7 +233,7 @@ class TrivariateGaussian(LaserProfile):
        >>> width_y = 2e-2 # standard deviation in y direction in m
 
            # create the laser profile
-       >>> laser_profile = ConstantBivariateGaussian(pulse_energy, pulse_length, pulse_z, radius, length, width_x, width_y, polarisation)
+       >>> laser_profile = TrivariateGaussian(pulse_energy, pulse_length, pulse_z, radius, length, width_x, width_y, polarisation)
 
 
     :param float pulse_energy: The energy of the laser in Joules delivered in a single laser pulse.
@@ -307,7 +307,7 @@ class TrivariateGaussian(LaserProfile):
     def generate_geometry(self) -> list[Cylinder]: ...
 
 class GaussianBeamAxisymmetric(LaserProfile):
-    """
+    r"""
     LaserProfile with volumetric energy density following the Gaussian beam model.
 
     Returns a laser with a cylindrical shape and the propagation of the laser light in the positive z direction. This model implements
@@ -315,24 +315,25 @@ class GaussianBeamAxisymmetric(LaserProfile):
     The volumetric energy density is given by
 
     .. math::
-         E(x, y, z) = \\frac{E_{xy}}{2 \\pi \\sigma^2(z)} exp\\left( -\\frac{x^2 + y^2}{2 \\sigma^2(z) }\\right) \\\\\n
+        E(x, y, z) = \frac{E_{xy}}{2 \pi \sigma^2(z)} \exp\left( -\frac{x^2 + y^2}{2 \sigma^2(z) }\right)
+
     where the sigma is the standard deviation of the Gaussian shape in the xy plane and is given by
 
     .. math::
-         sigma(z) = \\sigma_0 \\sqrt{1 + \\left(\\frac{z - z_0}{z_R}\\right)^2}.
+        \sigma(z) = \sigma_0 \sqrt{1 + \left(\frac{z - z_0}{z_R}\right)^2}.
 
-    The z_0 is the position of the beam focus and z_R is the Rayleigh length
-
-    .. math::
-         z_R = \\frac{\\pi \\omega_0^2 n}{\\lambda_l}
-
-    where the omega_0 is the standard deviation in the xy plane in the focal point (beam waist) and lambda_l is the central wavelength of
-    the laser. The E_xy stand for the laser energy in an xy plane and is calculated as:
+    The :math:`z_0` is the position of the beam focus and :math:`z_R` is the Rayleigh length
 
     .. math::
-         E_{xy} = \\frac{E_p}{(c * \\tau)},
+        z_R = \frac{\pi \omega_0^2 n}{\lambda_l}
 
-    where the E_p is the energy in a single laser pulse and tau is the temporal pulse length.
+    where the :math:`\omega_0` is the standard deviation in the xy plane in the focal point (beam waist) and :math:`\lambda_l` is the central wavelength of
+    the laser. The :math:`E_{xy}` stand for the laser energy in an xy plane and is calculated as:
+
+    .. math::
+        E_{xy} = \frac{E_\mathrm{p}}{(c * \tau)},
+
+    where the :math:`E_\mathrm{p}` is the energy in a single laser pulse and :math:`\tau` is the temporal pulse length.
 
     .. note::
         For more information about the Gaussian beam model see https://en.wikipedia.org/wiki/Gaussian_beam
@@ -423,9 +424,9 @@ class GaussianBeamAxisymmetric(LaserProfile):
     @laser_wavelength.setter
     def laser_wavelength(self, value: float) -> None: ...
     def _function_changed(self) -> None:
-        """
-        Energy density should be returned in units [J/m ** 3]. Energy shape in xy
-        plane is defined by normal distribution (integral over xy plane for
+        """Energy density should be returned in units [J/m ** 3].
+
+        Energy shape in xy plane is defined by normal distribution (integral over xy plane for
         constant z is 1). The units of such distribution are [m ** -2].
         In the z axis direction (direction of laser propagation),
         the laser_energy is spread along the z axis using the velocity
@@ -435,4 +436,13 @@ class GaussianBeamAxisymmetric(LaserProfile):
         """
     def generate_geometry(self) -> list[Cylinder]: ...
 
-def generate_segmented_cylinder(radius: float, length: float) -> list[Cylinder]: ...
+def generate_segmented_cylinder(radius: float, length: float) -> list[Cylinder]:
+    """
+    Generates a segmented cylindrical laser geometry
+
+    Approximates a long cylinder with a cylindrical segments to optimize
+    targeted and importance sampling. The height of a cylinder segments is roughly
+    2 * cylinder radius.
+
+    :return: List of cylinders
+    """

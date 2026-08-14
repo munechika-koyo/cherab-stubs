@@ -6,6 +6,21 @@ from .laserspectrum import LaserSpectrum
 from .profile import LaserProfile
 
 class LaserModel:
+    """
+    Laser spectrum base class.
+
+    This is an abstract class and cannot be used for observing.
+
+    Calculates the contribution to a spectrum caused by a laser.
+
+    :param laser_profile: LaserProfile object
+    :param plasma: Plasma object
+    :param laser_spectrum: LaserSpectrum object
+
+    :ivar laser_profile: LaserProfile object
+    :ivar plasma: Plasma object
+    :ivar laser_spectrum: LaserSpectrum object
+    """
     def __init__(self) -> None: ...
     def emission(
         self,

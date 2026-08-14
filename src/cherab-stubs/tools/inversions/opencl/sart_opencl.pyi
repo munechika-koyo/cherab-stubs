@@ -99,7 +99,7 @@ class SartOpencl:
         conv_tol: float = 0.0001,
         time_limit: float | None = None,
     ) -> tuple[NDArray[np.float32], list[float]]:
-        """
+        r"""
         Performs the inversion for a given measurement vector.
 
         :param np.ndarray measurement_vector: The measured power/radiance vector with
@@ -120,7 +120,7 @@ class SartOpencl:
         :param float time_limit: If set, the iterations will stop after this time limit (in
             seconds) is reached. Default value: `time_limit=None`.
 
-        :return: A tuple with the inverted solution vector :math:`\\mathbf{x}` as an ndarray with
+        :return: A tuple with the inverted solution vector :math:`\mathbf{x}` as an ndarray with
             shape :math:`(N_s)`, and the list of convergence values achieved after each iteration
             step.
         """

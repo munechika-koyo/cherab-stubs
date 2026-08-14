@@ -34,11 +34,22 @@ def sample1d_points(
     x_points: ArrayLike,
 ) -> NDArray[np.float64]:
     """
-    Sample a 1D function at the specified points.
+    Sample a 1D function at the specified points
 
     :param function1d: a Python function or Function1D object
-    :param x_points: a 1D array of points to sample the function at
-    :return: a 1D array containing the sampled values at the specified points
+    :param x_points: an array of points at which to sample the function
+    :return: an array containing the sampled values
+
+    .. code-block:: pycon
+
+       >>> from cherab.core.math import sample1d_points
+       >>>
+       >>> def f1(x):
+       >>>     return x**2
+       >>>
+       >>> f_vals = sample1d_points(f1, [1, 2, 3])
+       >>> f_vals
+       array([1., 4., 9.])
     """
 
 def sample2d(

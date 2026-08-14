@@ -5,23 +5,23 @@ from numpy.typing import NDArray
 from raysect.core.math.function.float import Function1D
 
 class ZeemanStructure:
-    """
+    r"""
     Provides wavelengths and ratios of
-    :math:`\\pi`-/:math:`\\sigma`-polarised Zeeman components for any given value of
+    :math:`\pi`-/:math:`\sigma`-polarised Zeeman components for any given value of
     magnetic field strength.
 
     :param list pi_components: A list of 2-tuples of Function1D objects that provide the
-                               wavelengths and ratios of individual :math:`\\pi`-polarised
+                               wavelengths and ratios of individual :math:`\pi`-polarised
                                Zeeman components for a given magnetic field strength:
                                [(wvl_func1, ratio_func1), (wvl_func2, ratio_func2), ...]
     :param list sigma_plus_components: A list of 2-tuples of Function1D objects that provide the
                                        wavelengths and ratios of individual
-                                       :math:`\\sigma^{+}`-polarised Zeeman components for
+                                       :math:`\sigma^{+}`-polarised Zeeman components for
                                        a given magnetic field strength:
                                        [(wvl_func1, ratio_func1), (wvl_func2, ratio_func2), ...]
     :param list sigma_minus_components: A list of 2-tuples of Function1D objects that provide the
                                         wavelengths and ratios of individual
-                                        :math:`\\sigma^{-}`-polarised
+                                        :math:`\sigma^{-}`-polarised
                                         Zeeman components for a given magnetic field strength:
                                         [(wvl_func1, ratio_func1), (wvl_func2, ratio_func2), ...]
     """

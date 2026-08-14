@@ -5,16 +5,16 @@ from raysect.core.math.function.float import Function3D
 from raysect.core.math.function.vector3d import Function3D as VectorFunction3D
 
 class CylindricalTransform(Function3D):
-    """
+    r"""
     Convert Cartesian coordinates to cylindrical coordinates and calls a 3D function
-    defined in cylindrical coordinates, f(r, :math:`\\phi`, z).
+    defined in cylindrical coordinates, f(r, :math:`\phi`, z).
 
     The angular coordinate is given in radians.
 
     Positive angular coordinate is measured counterclockwise from the xz plane.
 
     :param Function3D function3d: The function to be mapped. Must be defined
-                                  in the interval (:math:`-\\pi`, :math:`\\pi`]
+                                  in the interval (:math:`-\pi`, :math:`\pi`]
                                   on the angular axis.
 
     .. code-block:: pycon
@@ -41,9 +41,9 @@ class CylindricalTransform(Function3D):
     ) -> None: ...
 
 class VectorCylindricalTransform(VectorFunction3D):
-    """
+    r"""
     Convert Cartesian coordinates to cylindrical coordinates, calls
-    a 3D vector function defined in cylindrical coordinates, f(r, :math:`\\phi`, z),
+    a 3D vector function defined in cylindrical coordinates, f(r, :math:`\phi`, z),
     then converts the returned 3D vector to Cartesian coordinates.
 
     The angular coordinate is given in radians.
@@ -51,7 +51,7 @@ class VectorCylindricalTransform(VectorFunction3D):
     Positive angular coordinate is measured counterclockwise from the xz plane.
 
     :param VectorFunction3D function3d: The function to be mapped. Must be defined
-                                        in the interval (:math:`-\\pi`, :math:`\\pi`]
+                                        in the interval (:math:`-\pi`, :math:`\pi`]
                                         on the angular axis.
 
     .. code-block:: pycon

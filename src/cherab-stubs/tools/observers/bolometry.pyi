@@ -108,9 +108,9 @@ class BolometerSlit(Node):
     geometry is specified in terms of its centre_point, basis vectors in the plane of
     the slit and their respective lengths. When instantiating a
     :class:`BolometerSlit` object these values are defined in the local coordinate
-    system of the slit\'s parent, usually a :class:`BolometerCamera` object. Accessing
+    system of the slit's parent, usually a :class:`BolometerCamera` object. Accessing
     these properties on an existing :class:`BolometerSlit` object returns them in the
-    world\'s coordinate system.
+    world's coordinate system.
 
     If an external mesh model has been loaded for ray occlusion evaluation then this
     object is only used for targeting rays on the slit. If no mesh has been supplied,
@@ -120,8 +120,8 @@ class BolometerSlit(Node):
        Be very careful when using a CSG aperture. The aperture geometry is slightly
        larger than the slit dx and dy, which can cause partial occlusion of
        nearby primitives. It also relies on no rays being launched with directions
-       outside the solid angle of the aperture\'s bounding sphere: depending on the
-       foil-slit distance and slit size, and also the foil\'s targeted_path_prob,
+       outside the solid angle of the aperture's bounding sphere: depending on the
+       foil-slit distance and slit size, and also the foil's targeted_path_prob,
        this may not be guaranteed. Supplying a proper mesh geometry for the camera
        is recommended instead of using a CSG aperture.
 
@@ -206,7 +206,7 @@ class BolometerFoil(TargetedPixel):
 
     When instantiating a detector, the position and orientation
     (i.e. centre_point, basis_x and basis_y) are given in the local coordinate
-    system of the foil\'s parent, usually a :class:`BolometerCamera` instance.
+    system of the foil's parent, usually a :class:`BolometerCamera` instance.
     When these properties are accessed after instantiation, they are given in
     the coordinate system of the world.
 
@@ -219,7 +219,7 @@ class BolometerFoil(TargetedPixel):
     :param Node parent: The parent scenegraph node to which this detector belongs.
       Typically a :class:`BolometerCamera` or an optical :class:`World` object.
     :param str units: The units in which to perform observations, can
-      be [\'Power\', \'Radiance\'].
+      be ['Power', 'Radiance'].
     :param bool accumulate: Whether this observer should accumulate samples
       with multiple calls to observe.
     :param float curvature_radius: Detectors in real bolometer cameras typically
@@ -315,12 +315,12 @@ class BolometerFoil(TargetedPixel):
     spectral_bins: int
     pixel_samples: int
     def calculate_sensitivity(self, voxel_collection: VoxelCollection, ray_count: int = 10000) -> NDArray[np.float64]:
-        """
+        r"""
         Calculates a sensitivity vector for this detector on the specified voxel collection.
 
         This function is used for calculating sensitivity matrices which can be
         combined for multiple detectors into a sensitivity matrix
-        :math:`\\mathbf{W}`. If the :class:`BolometerFoil` has units of "Power", the
+        :math:`\mathbf{W}`. If the :class:`BolometerFoil` has units of "Power", the
         returned sensitivity matrix has units of [m³ sr]. If the
         :class:`BolometerFoil` has units of "Radiance", the returned sensitivity
         matrix has units of [m sr].
@@ -474,11 +474,11 @@ class BolometerIRVB(TargetedCCDArray):
     min_wavelength: float
     max_wavelength: float
     def calculate_sensitivity(self, voxel_collection: VoxelCollection, ray_count: int | None = None) -> NDArray[np.float64]:
-        """
+        r"""
         Calculates a sensitivity vector for this detector on the specified voxel collection.
 
         This function is used for calculating sensitivity matrices which can be combined for
-        multiple detectors into a sensitivity matrix :math:`\\mathbf{W}`.
+        multiple detectors into a sensitivity matrix :math:`\mathbf{W}`.
 
         :param VoxelCollection voxel_collection: The voxel collection on which to calculate
           the sensitivities.

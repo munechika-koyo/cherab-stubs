@@ -6,7 +6,19 @@ from ...plasma import Plasma
 from ...species import Species
 from .base import LineShapeModel
 
-def add_gaussian_line(radiance: float, wavelength: float, sigma: float, spectrum: Spectrum) -> Spectrum: ...
+def add_gaussian_line(radiance: float, wavelength: float, sigma: float, spectrum: Spectrum) -> Spectrum:
+    r"""
+    Adds a Gaussian line to the given spectrum and returns the new spectrum.
+
+    The formula used is based on the following definite integral:
+    :math:`\frac{1}{\sigma \sqrt{2 \pi}} \int_{\lambda_0}^{\lambda_1} \exp(-\frac{(x-\mu)^2}{2\sigma^2}) dx = \frac{1}{2} \left[ -Erf(\frac{a-\mu}{\sqrt{2}\sigma}) +Erf(\frac{b-\mu}{\sqrt{2}\sigma}) \right]`
+
+    :param float radiance: Intensity of the line in radiance.
+    :param float wavelength: central wavelength of the line in nm.
+    :param float sigma: width of the line in nm.
+    :param Spectrum spectrum: the current spectrum to which the gaussian line is added.
+    :return:
+    """
 
 class GaussianLine(LineShapeModel):
     """

@@ -4,6 +4,11 @@ from raysect.optical import Ray, Spectrum, World
 from raysect.optical.material import RoughConductor
 
 class RToptimisedRoughConductor(RoughConductor):
+    """
+    A `RoughConductor` optimised for calculation of ray transfer matrix (geometry matrix).
+    The spectral array in this case contains ~ 10^5 - 10^6 spectral bins but the wavelengths for all of them are equal.
+    The Fresnel indices are equal for all spectral bins, so the unnecessary calculations are avoided.
+    """
     def evaluate_shading(
         self,
         world: World,

@@ -8,7 +8,7 @@ def generate_derivative_operators(
     grid_index_1d_to_2d_map: NDArray[np.integer],
     grid_index_2d_to_1d_map: NDArray[np.integer],
 ) -> dict[str, NDArray[np.float64]]:
-    """
+    r"""
     Generate the first and second derivative operators for a regular grid.
 
     :param ndarray voxel_vertices: an Nx4x2 array of coordinates of the
@@ -35,7 +35,8 @@ def generate_derivative_operators(
     operators:
 
     .. math::
-        D_{xx} \\equiv \\frac{\\partial^2}{\\partial x^2}\\\\\n        D_{xy} \\equiv \\frac{\\partial^2}{\\partial x \\partial y}
+        D_{xx} \equiv \frac{\partial^2}{\partial x^2}\\
+        D_{xy} \equiv \frac{\partial^2}{\partial x \partial y}
 
     etc.
 
@@ -54,7 +55,7 @@ def calculate_admt(
     dy: float,
     anisotropy: float = 10,
 ) -> NDArray[np.float64]:
-    """
+    r"""
     Calculate the ADMT regularisation operator.
 
     :param ndarray voxel_radii: a 1D array of the radius at the centre
@@ -85,7 +86,7 @@ def calculate_admt(
     56 of Ingesson's report, where the ADMT operator L satisfies:
 
     .. math::
-        \\Omega = L^T \\cdot L
+        \Omega = L^T \cdot L
 
     This means it is suitable for use in Cherab's inversion methods,
     such as NNLS and SART.
