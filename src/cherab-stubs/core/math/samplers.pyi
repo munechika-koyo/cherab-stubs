@@ -73,6 +73,33 @@ def sample2d(
               [9.,10.,13.,18.]])
     """
 
+def sample2d_points(
+    function2d: Callable[[float, float], float],
+    points: ArrayLike,
+) -> NDArray[np.float64]:
+    """
+    Sample a 2D function at the specified points.
+
+    This function is for sampling at an unstructured sequence of points.
+    For sampling over a regular grid, consider sample2d or sample2d_grid
+    instead.
+
+    :param function2d: a Python function or Function2D object
+    :param points: an Nx2 array of points at which to sample the function
+    :return: a 1D array containing the sampled values at each point
+
+    .. code-block:: pycon
+
+       >>> from cherab.core.math import sample2d_points
+       >>>
+       >>> def f1(x, y):
+       >>>     return x**2 + y
+       >>>
+       >>> f_vals = sample2d_points(f1, [[1, 1], [2, 2], [3, 3]])
+       >>> f_vals
+       array([ 2.,  6., 12.])
+    """
+
 def sample2d_grid(
     function2d: Callable[[float, float], float],
     x: ArrayLike,
@@ -99,33 +126,6 @@ def sample2d_grid(
        >>> f_vals
        array([[2., 3., 4.],
               [5., 6., 7.]])
-    """
-
-def sample2d_points(
-    function2d: Callable[[float, float], float],
-    points: ArrayLike,
-) -> NDArray[np.float64]:
-    """
-    Sample a 2D function at the specified points.
-
-    This function is for sampling at an unstructured sequence of points.
-    For sampling over a regular grid, consider sample2d or sample2d_grid
-    instead.
-
-    :param function2d: a Python function or Function2D object
-    :param points: an Nx2 array of points at which to sample the function
-    :return: a 1D array containing the sampled values at each point
-
-    .. code-block:: pycon
-
-       >>> from cherab.core.math import sample2d_points
-       >>>
-       >>> def f1(x, y):
-       >>>     return x**2 + y
-       >>>
-       >>> f_vals = sample2d_points(f1, [[1, 1], [2, 2], [3, 3]])
-       >>> f_vals
-       array([ 2.,  6., 12.])
     """
 
 def sample3d(

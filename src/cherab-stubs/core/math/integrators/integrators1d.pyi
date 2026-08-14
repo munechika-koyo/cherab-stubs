@@ -1,8 +1,6 @@
 from collections.abc import Callable
 
-from raysect.core.math.function.float import Constant1D, Function1D
-
-ZERO_1D = Constant1D(0)
+from raysect.core.math.function.float import Function1D
 
 class Integrator1D:
     """
@@ -10,16 +8,6 @@ class Integrator1D:
 
     :ivar Function1D integrand: A 1D function to integrate.
     """
-
-    def __call__(self, a: float, b: float) -> float:
-        """
-        Integrates a one-dimensional function over a finite interval.
-
-        :param float a: Lower limit of integration.
-        :param float b: Upper limit of integration.
-
-        :returns: Definite integral of a one-dimensional function.
-        """
 
     @property
     def integrand(self) -> Function1D:
@@ -31,6 +19,15 @@ class Integrator1D:
 
     @integrand.setter
     def integrand(self, func: float | Function1D | Callable[[float], float]) -> None: ...
+    def __call__(self, a: float, b: float) -> float:
+        """
+        Integrates a one-dimensional function over a finite interval.
+
+        :param float a: Lower limit of integration.
+        :param float b: Upper limit of integration.
+
+        :returns: Definite integral of a one-dimensional function.
+        """
 
 class GaussianQuadrature(Integrator1D):
     """
@@ -53,7 +50,7 @@ class GaussianQuadrature(Integrator1D):
 
     def __init__(
         self,
-        integrand: float | Function1D | Callable[[float], float] = ZERO_1D,
+        integrand: float | Function1D | Callable[[float], float] = ...,
         relative_tolerance: float = 1.0e-5,
         max_order: int = 50,
         min_order: int = 1,

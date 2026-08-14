@@ -1,0 +1,29 @@
+from collections.abc import Mapping
+from os import PathLike
+
+from ...core.atomic import Element
+
+_Path = str | PathLike[str]
+_Rate = dict[str, object]
+
+def add_ionisation_rate(species: Element, charge: int, rate: Mapping[str, object], repository_path: _Path | None = None) -> None: ...
+def update_ionisation_rates(rates: Mapping[Element, Mapping[int, Mapping[str, object]]], repository_path: _Path | None = None) -> None: ...
+def add_recombination_rate(species: Element, charge: int, rate: Mapping[str, object], repository_path: _Path | None = None) -> None: ...
+def update_recombination_rates(rates: Mapping[Element, Mapping[int, Mapping[str, object]]], repository_path: _Path | None = None) -> None: ...
+def add_thermal_cx_rate(
+    donor_element: Element,
+    donor_charge: int,
+    receiver_element: Element,
+    rate: Mapping[str, object],
+    repository_path: _Path | None = None,
+) -> None: ...
+def update_thermal_cx_rates(rates: Mapping[object, object], repository_path: _Path | None = None) -> None: ...
+def get_ionisation_rate(element: Element, charge: int, repository_path: _Path | None = None) -> _Rate: ...
+def get_recombination_rate(element: Element, charge: int, repository_path: _Path | None = None) -> _Rate: ...
+def get_thermal_cx_rate(
+    donor_element: Element,
+    donor_charge: int,
+    receiver_element: Element,
+    receiver_charge: int,
+    repository_path: _Path | None = None,
+) -> _Rate: ...

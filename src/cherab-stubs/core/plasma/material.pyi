@@ -23,7 +23,7 @@ class PlasmaMaterial(InhomogeneousVolumeEmitter):
         integrator: VolumeIntegrator,
         local_to_plasma: AffineMatrix3D,
     ) -> None: ...
-    def emission_function(
+    def emission_function(  # pyrefly: ignore [bad-override-param-name]
         self,
         point: Point3D,
         direction: Vector3D,
@@ -31,6 +31,6 @@ class PlasmaMaterial(InhomogeneousVolumeEmitter):
         world: World,
         ray: Ray,
         primitive: Primitive,
-        world_to_primitive: AffineMatrix3D,
-        primitive_to_world: AffineMatrix3D,
+        to_local: AffineMatrix3D,
+        to_world: AffineMatrix3D,
     ) -> Spectrum: ...

@@ -1,0 +1,3 @@
+from raysect.core import Point3D, Primitive, Vector3D, World
+
+def find_wall_intersection(world: World, centre_point: Point3D, sightline_vec: Vector3D, delta: float = 0.001) -> tuple[Point3D, Primitive]: ...

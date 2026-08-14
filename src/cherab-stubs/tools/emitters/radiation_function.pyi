@@ -38,10 +38,10 @@ class RadiationFunction(InhomogeneousVolumeEmitter):
     radiation_function: Function3D
     def __init__(
         self,
-        radiation_function: Callable[[float, float, float], float],
+        radiation_function: Callable[[float, float, float], float] | Function3D,
         step: float = 0.1,
     ) -> None: ...
-    def emission_function(
+    def emission_function(  # pyrefly: ignore [bad-override-param-name]
         self,
         point: Point3D,
         direction: Vector3D,
@@ -49,6 +49,6 @@ class RadiationFunction(InhomogeneousVolumeEmitter):
         world: World,
         ray: Ray,
         primitive: Primitive,
-        world_to_primitive: AffineMatrix3D,
-        primitive_to_world: AffineMatrix3D,
+        world_to_local: AffineMatrix3D,
+        local_to_world: AffineMatrix3D,
     ) -> Spectrum: ...

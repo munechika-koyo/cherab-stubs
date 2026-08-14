@@ -31,9 +31,7 @@ class PlasmaModel:
     _plasma: Plasma | None
     _atomic_data: AtomicData | None
 
-    def __init__(
-        self, plasma: Plasma | None = None, atomic_data: AtomicData | None = None
-    ) -> None: ...
+    def __init__(self, plasma: Plasma | None = None, atomic_data: AtomicData | None = None) -> None: ...
     @property
     def plasma(self) -> Plasma: ...
     @plasma.setter

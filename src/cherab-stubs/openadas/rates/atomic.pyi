@@ -24,12 +24,12 @@ class IonisationRate(CoreIonisationRate):
     :ivar dict raw_data: Dictionary containing the raw data.
     """
 
-    raw_data: dict
+    raw_data: dict[str, object]
     density_range: tuple[float, float]
     temperature_range: tuple[float, float]
     _rate: Interpolator2DArray
 
-    def __init__(self, data: dict, extrapolate: bool = False) -> None: ...
+    def __init__(self, data: dict[str, object], extrapolate: bool = False) -> None: ...
     def evaluate(self, density: float, temperature: float) -> float: ...
 
 class NullIonisationRate(CoreIonisationRate):
@@ -60,12 +60,12 @@ class RecombinationRate(CoreRecombinationRate):
     :ivar dict raw_data: Dictionary containing the raw data.
     """
 
-    raw_data: dict
+    raw_data: dict[str, object]
     density_range: tuple[float, float]
     temperature_range: tuple[float, float]
     _rate: Interpolator2DArray
 
-    def __init__(self, data: dict, extrapolate: bool = False) -> None: ...
+    def __init__(self, data: dict[str, object], extrapolate: bool = False) -> None: ...
     def evaluate(self, density: float, temperature: float) -> float: ...
 
 class NullRecombinationRate(CoreRecombinationRate):
@@ -96,12 +96,12 @@ class ThermalCXRate(CoreThermalCXRate):
     :ivar dict raw_data: Dictionary containing the raw data.
     """
 
-    raw_data: dict
+    raw_data: dict[str, object]
     density_range: tuple[float, float]
     temperature_range: tuple[float, float]
     _rate: Interpolator2DArray
 
-    def __init__(self, data: dict, extrapolate: bool = False) -> None: ...
+    def __init__(self, data: dict[str, object], extrapolate: bool = False) -> None: ...
     def evaluate(self, density: float, temperature: float) -> float: ...
 
 class NullThermalCXRate(CoreThermalCXRate):

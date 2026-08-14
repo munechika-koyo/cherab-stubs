@@ -1,5 +1,3 @@
-from abc import abstractmethod
-
 from .elements import Element
 
 class IonisationRate:
@@ -11,7 +9,6 @@ class IonisationRate:
         This function just wraps the cython evaluate() method.
         """
 
-    @abstractmethod
     def evaluate(self, density: float, temperature: float) -> float:
         """Return an effective ionisation rate coefficient at the specified plasma conditions.
 
@@ -29,7 +26,6 @@ class RecombinationRate:
         This function just wraps the cython evaluate() method.
         """
 
-    @abstractmethod
     def evaluate(self, density: float, temperature: float) -> float:
         """Return an effective recombination rate coefficient at the specified plasma conditions.
 
@@ -47,7 +43,6 @@ class ThermalCXRate:
         This function just wraps the cython evaluate() method.
         """
 
-    @abstractmethod
     def evaluate(self, density: float, temperature: float) -> float:
         """Return an effective charge exchange rate coefficient at the specified plasma conditions.
 
@@ -65,7 +60,6 @@ class _PECRate:
         This function just wraps the cython evaluate() method.
         """
 
-    @abstractmethod
     def evaluate(self, density: float, temperature: float) -> float:
         """Return a photon emissivity coefficient at given conditions.
 
@@ -91,18 +85,13 @@ class RecombinationPEC(_PECRate):
 class ThermalCXPEC:
     """Thermal charge exchange rate coefficient."""
 
-    def __call__(
-        self, electron_density: float, electron_temperature: float, donor_temperature: float
-    ) -> float:
+    def __call__(self, electron_density: float, electron_temperature: float, donor_temperature: float) -> float:
         """Return a CX photon emissivity coefficient at the specified plasma conditions.
 
         This function just wraps the cython evaluate() method.
         """
 
-    @abstractmethod
-    def evaluate(
-        self, electron_density: float, electron_temperature: float, donor_temperature: float
-    ) -> float:
+    def evaluate(self, electron_density: float, electron_temperature: float, donor_temperature: float) -> float:
         """Return a CX photon emissivity coefficient at given conditions.
 
         :param electron_density: Electron density in m^-3.
@@ -125,18 +114,13 @@ class BeamCXPEC:
     donor_metastable: int
 
     def __init__(self, donor_metastable: int) -> None: ...
-    def __call__(
-        self, energy: float, temperature: float, density: float, z_effective: float, b_field: float
-    ) -> float:
+    def __call__(self, energy: float, temperature: float, density: float, z_effective: float, b_field: float) -> float:
         """Evaluate the Beam CX rate at the given plasma conditions.
 
         This function just wraps the cython evaluate() method.
         """
 
-    @abstractmethod
-    def evaluate(
-        self, energy: float, temperature: float, density: float, z_effective: float, b_field: float
-    ) -> float:
+    def evaluate(self, energy: float, temperature: float, density: float, z_effective: float, b_field: float) -> float:
         """Evaluate the Beam CX rate at the given plasma conditions.
 
         :param float energy: Interaction energy in eV/amu.
@@ -150,7 +134,6 @@ class BeamCXPEC:
 class _BeamRate:
     """Beam coefficient base class."""
 
-    @abstractmethod
     def evaluate(self, energy: float, density: float, temperature: float) -> float:
         """
         Return the beam coefficient for the supplied parameters.
@@ -204,17 +187,6 @@ class TotalRadiatedPower:
         This function just wraps the cython evaluate() method.
         """
 
-    @abstractmethod
-    def evaluate(self, electron_density: float, electron_temperature: float) -> float:
-        """
-        Evaluate the total radiated power rate at the given plasma conditions.
-
-        :param float electron_density: Electron density in m^-3.
-        :param float electron_temperature: Electron temperature in eV.
-
-        :return: The total radiated power rate in W.m^3.
-        """
-
 class _RadiatedPower:
     """Base class for ionisation-resolved radiated powers."""
 
@@ -229,7 +201,6 @@ class _RadiatedPower:
         This function just wraps the cython evaluate() method.
         """
 
-    @abstractmethod
     def evaluate(self, electron_density: float, electron_temperature: float) -> float:
         """
         Evaluate the radiated power at the given plasma conditions.
@@ -275,17 +246,6 @@ class FractionalAbundance:
     charge: int
 
     def __init__(self, element: Element, charge: int, name: str = "") -> None: ...
-    @abstractmethod
-    def evaluate(self, electron_density: float, electron_temperature: float) -> float:
-        """
-        Evaluate the fractional abundance of this ionisation stage at the given plasma conditions.
-
-        :param float electron_density: Electron density in m^-3.
-        :param float electron_temperature: Electron temperature in eV.
-
-        :return: Fractional abundance.
-        """
-
     def __call__(self, electron_density: float, electron_temperature: float) -> float:
         """
         Evaluate the fractional abundance of this ionisation stage at the given plasma conditions.

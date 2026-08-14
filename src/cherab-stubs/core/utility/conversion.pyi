@@ -1,3 +1,8 @@
+Planck: float
+atomic_mass: float
+elementary_charge: float
+speed_of_light: float
+
 class EvAmuToMS:
     """Converts from eV/amu to velocity (m/s)"""
 

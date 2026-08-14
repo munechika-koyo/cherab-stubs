@@ -153,9 +153,9 @@ class Swizzle3D(Function3D):
     """
 
     function3d: Function3D
-    shape: tuple
+    shape: tuple[int, int, int]
 
-    def __init__(self, function3d: Function3D, shape: tuple): ...
+    def __init__(self, function3d: Function3D, shape: tuple[int, int, int]) -> None: ...
 
 class AxisymmetricMapper(Function3D):
     """

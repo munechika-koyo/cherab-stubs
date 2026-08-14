@@ -1,5 +1,7 @@
 from typing import Literal
 
+import numpy as np
+from numpy.typing import NDArray
 from raysect.core.math.function.float import Function1D
 
 class ZeemanStructure:
@@ -29,4 +31,4 @@ class ZeemanStructure:
         sigma_plus_components: list[tuple[Function1D, Function1D]],
         sigma_minus_components: list[tuple[Function1D, Function1D]],
     ) -> None: ...
-    def __call__(self, b: float, polarisation: Literal["pi", "sigma_plus", "sigma_minus"]): ...
+    def __call__(self, b: float, polarisation: Literal["pi", "sigma_plus", "sigma_minus"]) -> NDArray[np.float64]: ...

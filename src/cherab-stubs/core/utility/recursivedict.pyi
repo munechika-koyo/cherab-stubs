@@ -1,6 +1,11 @@
-from typing import Self
+import sys
 
-class RecursiveDict(dict):
+if sys.version_info >= (3, 11):
+    from typing import Self
+else:
+    from typing_extensions import Self
+
+class RecursiveDict(dict[object, object]):
     """
     A dictionary that implements a basic, automatically expanding tree.
 
@@ -33,18 +38,18 @@ class RecursiveDict(dict):
             }
         }
     """
-    def __missing__(self, key):
+    def __missing__(self, key: object) -> RecursiveDict:
         """
         Missing keys are automatically populated with RecursiveDicts.
         """
-    def freeze(self) -> dict:
+    def freeze(self) -> dict[object, object]:
         """
         Returns a copy of this object with the RecursiveDicts replaced with basic python dictionaries.
         """
     @classmethod
-    def from_dict(cls, dictionary: dict) -> Self:
+    def from_dict(cls, dictionary: dict[object, object]) -> Self:
         """
         Returns a copy of the dictionary as a RecursiveDict.
         """
     @classmethod
-    def _convert_dict_tree(cls, dict_tree: dict) -> Self: ...
+    def _convert_dict_tree(cls, dict_tree: dict[object, object]) -> Self: ...

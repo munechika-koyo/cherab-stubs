@@ -5,7 +5,6 @@ from raysect.core.scenegraph import Node, Primitive
 from raysect.core.scenegraph._nodebase import _NodeBase
 from raysect.optical import AffineMatrix3D, Vector3D
 from raysect.optical.material.emitter import VolumeIntegrator
-from raysect.optical.material.emitter.inhomogeneous import NumericalIntegrator
 
 from ..atomic import AtomicData
 from ..atomic.elements import Element
@@ -13,8 +12,6 @@ from ..distribution import DistributionFunction
 from ..species import Species
 from ..utility import Notifier
 from .model import PlasmaModel
-
-DEFAULT_INTEGRATOR = NumericalIntegrator(step=0.001)
 
 class Composition:
     """
@@ -251,7 +248,7 @@ class Plasma(Node):
         parent: _NodeBase | None = None,
         transform: AffineMatrix3D | None = None,
         name: str | None = None,
-        integrator: VolumeIntegrator | None = DEFAULT_INTEGRATOR,
+        integrator: VolumeIntegrator | None = ...,
     ) -> None: ...
     @property
     def b_field(self) -> VectorFunction3D: ...
