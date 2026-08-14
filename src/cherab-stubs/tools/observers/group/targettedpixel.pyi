@@ -6,7 +6,7 @@ from raysect.optical.observer import TargetedPixel
 
 from .base import Observer0DGroup as Observer0DGroup
 
-class TargetedPixelGroup(Observer0DGroup, metaclass=ABCMeta):
+class TargettedPixelGroup(Observer0DGroup, metaclass=ABCMeta):
     """
     A group of targeted pixel under a single scene-graph node.
 

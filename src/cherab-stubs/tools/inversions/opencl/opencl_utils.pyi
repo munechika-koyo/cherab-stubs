@@ -40,13 +40,13 @@ def get_first_device(platforms: list[object] | None = None, device_type: int | N
     :return: The pyopencl.Device instance corresponding to the first device available in the specified OpenCL platforms.
     """
 
-def device_select(platform_id: int | None = None, device_id: int | None = None, device_type: int | None = None, verbose: bool = False) -> object:
+def device_select(platfrom_id: int | None = None, device_id: int | None = None, device_type: int | None = None, verbose: bool = False) -> object:
     """
     OpenCL device selector. Returns the most powerful OpenCL device available
     if device_type is GPU or ACCELERATOR or the first OpenCL device available
     if device_type is CPU, ALL or CUSTOM.
 
-    :param int platform_id: OpenCL platform ID, defaults to `platform_id=None`.
+    :param int platfrom_id: OpenCL platform ID, defaults to `platfrom_id=None`.
     :param int device_id: OpenCL device ID (in the selected OpenCL platform),
                           defaults to `device_id=None`.
     :param pyopencl.device_type device_type: OpenCL device type (GPU, ACCELERATOR, etc.).

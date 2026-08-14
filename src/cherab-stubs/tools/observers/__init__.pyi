@@ -8,7 +8,7 @@ from .group import PixelGroup as PixelGroup
 from .group import SightLineGroup as SightLineGroup
 from .group import SpectroscopicFibreOpticGroup as SpectroscopicFibreOpticGroup
 from .group import SpectroscopicSightLineGroup as SpectroscopicSightLineGroup
-from .group import TargetedPixelGroup as TargetedPixelGroup
+from .group import TargettedPixelGroup as TargettedPixelGroup
 from .intersections import find_wall_intersection as find_wall_intersection
 from .spectroscopy import SpectroscopicFibreOptic as SpectroscopicFibreOptic
 from .spectroscopy import SpectroscopicSightLine as SpectroscopicSightLine
