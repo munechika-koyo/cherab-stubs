@@ -1,6 +1,0 @@
-[default.extend-words]
-sart = "sart"
-
-# misspelled words: will be corrected later
-platfrom = "platfrom"
-targetted = "targetted"

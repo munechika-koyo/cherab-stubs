@@ -7,7 +7,7 @@ preview = ["pixi-build"]
 # === Packaging Configuration ===
 # -------------------------------
 [package]
-version = "dynamic" # Until pixi recommends something else
+version = "dynamic"  # Until pixi recommends something else
 
 [package.build]
 backend = { name = "pixi-build-python", version = "*" }
@@ -43,37 +43,52 @@ cherab-stubs = { path = ".", editable = false }
 type-check = "mypy --strict --no-incremental -p cherab"
 
 # Type stub generation
-typegen = { cmd = [
-  "stubgen",
-  "-p",
-  "cherab",
-  "-o",
-  "stubgen_temp",
-  "--ignore-errors",
-  "--include-private",
-  "--include-docstrings",
-], description = "📝 Generate type stubs for cherab" }
+typegen = {
+  cmd = [
+    "stubgen",
+    "-p",
+    "cherab",
+    "-o",
+    "stubgen_temp",
+    "--ignore-errors",
+    "--include-private",
+    "--include-docstrings",
+  ],
+  description = "📝 Generate type stubs for cherab",
+}
 
-typegen-update = { cmd = [
-  "rm",
-  "-rf",
-  "src/cherab-stubs/",
-  "&&",
-  "mv",
-  "stubgen_temp/cherab/",
-  "src/cherab-stubs/",
-], description = "📝 Update type stubs for cherab" }
+typegen-update = {
+  cmd = [
+    "rm",
+    "-rf",
+    "src/cherab-stubs/",
+    "&&",
+    "mv",
+    "stubgen_temp/cherab/",
+    "src/cherab-stubs/",
+  ],
+  description = "📝 Update type stubs for cherab",
+}
 
 [feature.test.dependencies]
 pytest = "*"
 
 [feature.test.tasks]
-test-regression = { cmd = "pytest -q tests/test_stubs.py", description = "Run regression tests for the stubs" }
-test-stubtest = { cmd = "stubtest --allowlist=.mypyignore --ignore-disjoint-bases cherab", description = "Check stubs against the Cherab runtime" }
-test = { depends-on = [
-  "test-regression",
-  "test-stubtest",
-], description = "Run all stub tests" }
+test-regression = {
+  cmd = "pytest -q tests/test_stubs.py",
+  description = "Run regression tests for the stubs",
+}
+test-stubtest = {
+  cmd = "stubtest --allowlist=.mypyignore --ignore-disjoint-bases cherab",
+  description = "Check stubs against the Cherab runtime",
+}
+test = {
+  depends-on = [
+    "test-regression",
+    "test-stubtest",
+  ],
+  description = "Run all stub tests",
+}
 
 # === Linting feature ===
 [feature.lint.dependencies]
@@ -87,7 +102,7 @@ actionlint = "*"
 shellcheck = "*"
 validate-pyproject = "*"
 blacken-docs = "*"
-taplo = "*"
+tombi = "*"
 
 [feature.lint.tasks]
 lefthook = { cmd = "lefthook", description = "🔗 Run lefthook" }
@@ -97,9 +112,9 @@ mypy = { cmd = "mypy", description = "Type check with mypy" }
 pyrefly-check = { cmd = "pyrefly check", description = "Type check with pyrefly" }
 ruff-check = { cmd = "ruff check --fix", description = "Lint with ruff" }
 ruff-format = { cmd = "ruff format", description = "Format with ruff" }
+toml-format = { cmd = "tombi format", description = "Format TOML files" }
 dprint = { cmd = "dprint fmt", description = "Format with dprint" }
 typos = { cmd = "typos --write-changes --force-exclude", description = "Fix typos" }
-taplo = { cmd = "taplo fmt", description = "Format toml files with taplo" }
 actionlint = { cmd = "actionlint", description = "Lint actions with actionlint" }
 blacken-docs = { cmd = "blacken-docs", description = "Format Python markdown blocks with Black" }
 validate-pyproject = { cmd = "validate-pyproject pyproject.toml", description = "Validate pyproject.toml" }
@@ -119,17 +134,16 @@ build-sdist = { cmd = "python -m build -nx -s", description = "🔧 Build source
 # === Python environment features ===
 [feature.py-oldest.dependencies]
 python = "3.10.*"
+
 [feature.py-latest.dependencies]
 python = "3.14.*"
 
 [environments]
 default = { features = ["py-latest"], solve-group = "py-latest" }
-py-latest = { features = [
-  "py-latest",
-], solve-group = "py-latest" } # alias of test
+py-latest = { features = ["py-latest"], solve-group = "py-latest" }
 py-oldest = { features = ["py-oldest"], solve-group = "py-oldest" }
 test = ["test", "default"]
-test-pylatest = ["test", "py-latest"]
+test-pylatest = ["test", "py-latest"]  # Alias for test
 test-pyoldest = ["test", "py-oldest"]
 lint = ["lint", "test"]
 build = { features = ["build"], no-default-feature = true }
