@@ -4,7 +4,7 @@ from os import PathLike
 from ...core.atomic import Element
 
 _Path = str | PathLike[str]
-_Transition = tuple[int, int]
+_Transition = tuple[int, int] | tuple[str, str]
 
 def add_wavelength(element: Element, charge: int, transition: _Transition, wavelength: float, repository_path: _Path | None = None) -> None:
     """

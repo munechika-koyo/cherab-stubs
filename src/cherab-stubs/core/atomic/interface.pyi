@@ -1,6 +1,6 @@
 from .elements import Element
 from .gaunt import FreeFreeGauntFactor
-from .line import Line
+from .line import Line, _Transition
 from .rates import (
     BeamCXPEC,
     BeamEmissionPEC,
@@ -27,7 +27,7 @@ class AtomicData:
     atomic data.
     """
 
-    def wavelength(self, ion: Element, charge: int, transition: tuple[int, int]) -> float:
+    def wavelength(self, ion: Element, charge: int, transition: _Transition) -> float:
         """The natural wavelength of the specified transition in nm."""
 
     def ionisation_rate(self, ion: Element, charge: int) -> IonisationRate:

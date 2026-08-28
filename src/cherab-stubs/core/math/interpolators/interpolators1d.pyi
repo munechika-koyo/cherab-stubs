@@ -44,7 +44,7 @@ class _Interpolate1DBase(Function1D):
     def derivative(
         self,
         px: float,
-        order: int = 1,
+        order: int,
     ) -> float:
         """
         Return the derivative of the interpolating function to the specified order.

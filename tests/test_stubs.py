@@ -32,7 +32,9 @@ else:
     from typing_extensions import assert_type
 from raysect.core import Point3D, Vector3D, World
 from raysect.primitive import Sphere
-from cherab.core import Maxwellian, Plasma, Species, hydrogen
+from cherab.core import Line, Maxwellian, Plasma, Species, hydrogen
+from cherab.core.model import ExcitationLine
+from cherab.core.plasma.node import ModelManager as PlasmaModelManager
 from cherab.openadas import OpenADAS
 
 world = World()
@@ -43,7 +45,9 @@ plasma.atomic_data = OpenADAS()
 plasma.geometry = Sphere(1.0)
 plasma.b_field = Vector3D(0, 0, 2)
 plasma.electron_distribution = distribution
-plasma.composition = [species]
+plasma.composition = (item for item in (species,))
+plasma.models = [ExcitationLine(Line(hydrogen, 0, (3, 2)))]
+assert_type(plasma.models, PlasmaModelManager)
 assert_type(plasma.ion_density(0, 0, 0), float)
 assert_type(plasma.composition.get(hydrogen, 1), Species)
 assert_type(Point3D(0, 0, 0).vector_to(Point3D(1, 0, 0)), Vector3D)
@@ -93,7 +97,7 @@ from numpy.typing import NDArray
 from raysect.core.math.function.float import Constant3D
 from raysect.optical import Spectrum
 from cherab.openadas import OpenADAS
-from cherab.core import hydrogen
+from cherab.core import beryllium, hydrogen
 from cherab.tools.emitters import RadiationFunction
 from cherab.tools.inversions import ToroidalVoxelGrid
 from cherab.tools.raytransfer import CartesianRayTransferEmitter, RayTransferBox
@@ -102,6 +106,10 @@ emitter_from_callable = RadiationFunction(lambda x, y, z: x + y + z)
 emitter_from_function = RadiationFunction(Constant3D(1.0))
 adas = OpenADAS(permit_extrapolation=True)
 assert_type(adas.wavelength(hydrogen, 0, (3, 2)), float)
+assert_type(
+    adas.wavelength(beryllium, 0, ("2s1 3d1 1d2.0", "2s1 2p1 1p1.0")),
+    float,
+)
 assert_type(adas.ionisation_rate(hydrogen, 0).evaluate(1e19, 10.0), float)
 grid = ToroidalVoxelGrid([[(1.0, -0.1), (1.1, -0.1), (1.1, 0.1), (1.0, 0.1)]])
 assert_type(grid.emissivities_from_function(lambda x, y, z: 1.0), NDArray[np.float64])
@@ -182,3 +190,16 @@ OpenADAS().ionisation_rate(hydrogen, "neutral")
     assert "Incompatible types in assignment" in stdout
     assert "Missing positional argument" in stdout
     assert "incompatible type" in stdout
+
+
+def test_interpolator_derivative_requires_order() -> None:
+    stdout, status = _mypy(
+        """
+from cherab.core.math import Interpolate1DLinear
+
+interpolator = Interpolate1DLinear([0.0, 1.0], [0.0, 1.0])
+interpolator.derivative(0.5)
+"""
+    )
+    assert status != 0
+    assert 'Missing positional argument "order"' in stdout

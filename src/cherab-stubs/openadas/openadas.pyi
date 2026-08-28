@@ -7,6 +7,7 @@ else:
 
 from ..core.atomic import AtomicData
 from ..core.atomic.elements import Element
+from ..core.atomic.line import _Transition
 from ..core.atomic.rates import BeamCXPEC as CoreBeamCXPEC
 from .rates import (
     BeamEmissionPEC,
@@ -64,7 +65,7 @@ class OpenADAS(AtomicData):
     @property
     def data_path(self) -> str: ...
     @override
-    def wavelength(self, ion: Element, charge: int, transition: tuple[int, int]) -> float:
+    def wavelength(self, ion: Element, charge: int, transition: _Transition) -> float:
         """
         Spectral line wavelength for a given transition.
 

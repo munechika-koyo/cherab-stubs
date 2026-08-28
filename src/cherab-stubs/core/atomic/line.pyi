@@ -1,5 +1,7 @@
 from .elements import Element
 
+_Transition = tuple[int, int] | tuple[str, str]
+
 class Line:
     """
     A class fully specifies an observed spectroscopic emission line.
@@ -31,13 +33,13 @@ class Line:
 
     element: Element
     charge: int
-    transition: tuple[int, int] | tuple[str, str]
+    transition: _Transition
 
     def __init__(
         self,
         element: Element,
         charge: int,
-        transition: tuple[int, int] | tuple[str, str],
+        transition: _Transition,
     ) -> None: ...
     def __repr__(self) -> str: ...
     def __hash__(self) -> int: ...
