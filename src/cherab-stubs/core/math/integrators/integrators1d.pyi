@@ -29,7 +29,7 @@ class Integrator1D:
         :returns: Definite integral of a one-dimensional function.
         """
 
-class GaussianQuadrature(Integrator1D):
+class GaussianQuadrature1D(Integrator1D):
     """
     Compute an integral of a one-dimensional function over a finite interval
     using fixed-tolerance Gaussian quadrature.
