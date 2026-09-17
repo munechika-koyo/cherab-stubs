@@ -85,3 +85,32 @@ class GaussianQuadrature1D(Integrator1D):
 
     @relative_tolerance.setter
     def relative_tolerance(self, tolerance: float) -> None: ...
+
+class GaussianQuadrature(GaussianQuadrature1D):
+    """
+    Compute an integral of a one-dimensional function over a finite interval
+    using fixed-tolerance Gaussian quadrature.
+    (see Scipy `quadrature <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quadrature.html>`).
+
+    .. warning::
+        This class is deprecated and will be removed in cherab 1.7. Use :class:`GaussianQuadrature1D` instead.
+
+    :param object integrand: A 1D function to integrate. Default is Constant1D(0).
+    :param double relative_tolerance: Iteration stops when relative error between
+        last two iterates is less than this value. Default is 1.e-5.
+    :param int max_order: Maximum order on Gaussian quadrature. Default is 50.
+    :param int min_order: Minimum order on Gaussian quadrature. Default is 1.
+
+    :ivar Function1D integrand: A 1D function to integrate.
+    :ivar double relative_tolerance: Iteration stops when relative error between
+        last two iterates is less than this value.
+    :ivar int max_order: Maximum order on Gaussian quadrature.
+    :ivar int min_order: Minimum order on Gaussian quadrature.
+    """
+    def __init__(
+        self,
+        integrand: float | Function1D | Callable[[float], float] = ...,
+        relative_tolerance: float = 1.0e-5,
+        max_order: int = 50,
+        min_order: int = 1,
+    ) -> None: ...
