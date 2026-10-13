@@ -5,16 +5,6 @@ class FreeFreeGauntFactor:
     """
     The base class for temperature-averaged free-free Gaunt factors.
     """
-    def evaluate(self, z: float, temperature: float, wavelength: float) -> float:
-        """
-        Returns the temperature-averaged free-free Gaunt factor for the supplied parameters.
-
-        :param double z: Species charge or effective plasma charge.
-        :param double temperature: Electron temperature in eV.
-        :param double wavelength: Spectral wavelength.
-
-        :return: free-free Gaunt factor
-        """
     def __call__(self, z: float, temperature: float, wavelength: float) -> float:
         """
         Return the temperature-averaged free-free Gaunt factor for the supplied parameters.
@@ -52,16 +42,6 @@ class InterpolatedFreeFreeGauntFactor(FreeFreeGauntFactor):
     raw_data: dict[str, NDArray[np.float64]]
 
     def __init__(self, u: ArrayLike, gamma2: ArrayLike, gaunt_factor: ArrayLike) -> None: ...
-    def evaluate(self, z: float, temperature: float, wavelength: float) -> float:
-        """
-        Returns the temperature-averaged free-free Gaunt factor for the supplied parameters.
-
-        :param double z: Species charge or effective plasma charge.
-        :param double temperature: Electron temperature in eV.
-        :param double wavelength: Spectral wavelength.
-
-        :return: free-free Gaunt factor
-        """
 
 class MaxwellianFreeFreeGauntFactor(InterpolatedFreeFreeGauntFactor):
     """
