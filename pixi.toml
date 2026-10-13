@@ -26,7 +26,7 @@ raysect-stubs = ">=0.9.1,<0.10.0"
 typing-extensions = { version = ">=4.6", when = "python <3.12" }
 
 [package.run-constraints]
-cherab = ">=1.5.0,<1.6.0"
+cherab = ">=1.6.0,<1.7.0"
 
 # ---------------------------------
 # === Development Configuration ===
