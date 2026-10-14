@@ -5,22 +5,26 @@ __author__: str
 
 def generate_derivative_operators(
     voxel_vertices: NDArray[np.floating],
-    grid_index_1d_to_2d_map: NDArray[np.integer],
-    grid_index_2d_to_1d_map: NDArray[np.integer],
+    grid_index_1d_to_2d_map: NDArray[np.integer] | None = None,
+    grid_index_2d_to_1d_map: NDArray[np.integer] | None = None,
+    sparse: bool = False,
 ) -> dict[str, NDArray[np.float64]]:
     r"""
     Generate the first and second derivative operators for a regular grid.
 
     :param ndarray voxel_vertices: an Nx4x2 array of coordinates of the
-    vertices of each voxel, (R, Z)
+        vertices of each voxel, (R, Z)
     :param dict grid_1d_to_2d_map: a mapping from the 1D array of
-    voxels in the grid to a 2D array of voxels if they were arranged
-    spatially.
+        voxels in the grid to a 2D array of voxels if they were arranged
+        spatially. Computed from grid_2d_to_1d_map if not given.
     :param dict grid_2d_to_1d_map: the inverse mapping from a 2D
-    spatially-arranged array of voxels to the 1D array.
+        spatially-arranged array of voxels to the 1D array. Computed from
+        grid_1d_to_2d_map if not given.
+    :param sparse: return the operators as sparse matrices if True, or
+        as dense matrices if False.
 
-    :return dict operators: a dictionary containing the derivative
-    operators: Dij for i, y ∊ (x, y) and Di for i ∊ (x, y).
+    :return: a dictionary containing the derivative operators: Dij for
+        i, j ∊ (x, y) and Di for i ∊ (x, y), Dsp and Dsm.
 
     This function assumes that all voxels are rectilinear, with their
     axes aligned to the coordinate axes. Additionally, all voxels are
@@ -38,13 +42,18 @@ def generate_derivative_operators(
         D_{xx} \equiv \frac{\partial^2}{\partial x^2}\\
         D_{xy} \equiv \frac{\partial^2}{\partial x \partial y}
 
-    etc.
+    etc. It also produces two additional operators, Dsp and Dsm, for
+    second derivatives on the dy/dx = 1 and dy/dx = -1 diagonals
+    respectively.
 
     Note that the standard 2D laplacian (for isotropic regularisation)
-    can be trivially calculated as L = Dxx * dx + Dyy * dy, where dx and
-    dy are the voxel width and height respectively. This expression does
-    not however produce the 2D laplacian derived from the N-dimensional
-    case.
+    can be trivially calculated as follows:
+
+    .. math::
+        L = (1 - \alpha) (D_{xx} + D_{yy}) + (\alpha / 2) (D_{sp} + D_{sm})
+
+    α = 2/3 produces the operator used in Carr et. al. RSI 89, 083506 (2018).
+    α = 1/3 produces the operator with optimal isotropy.
     """
 
 def calculate_admt(
