@@ -38,7 +38,7 @@ All of the bolometer heads and foils are identical, and are defined by
 other module-level constants.
 """
 
-from raysect.core.scenegraph.node import _NodeBase
+from raysect.core.scenegraph._nodebase import _NodeBase
 
 from ...tools.observers import BolometerCamera
 
