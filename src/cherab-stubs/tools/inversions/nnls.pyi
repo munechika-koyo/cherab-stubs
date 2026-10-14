@@ -1,5 +1,6 @@
 import numpy as np
 from numpy.typing import NDArray
+from scipy.sparse import sparray
 
 def invert_regularised_nnls(
     w_matrix: NDArray[np.floating],
@@ -15,7 +16,7 @@ def invert_regularised_nnls(
     This is a thin wrapper around scipy.optimize.nnls, which modifies
     the arguments to include the supplied Tikhonov regularisation matrix.
 
-    The values of w_matrix, b_vector and alpha * tikhonov_matrix are notmalised
+    The values of w_matrix, b_vector and alpha * tikhonov_matrix are normalised
     by max(b_vector) before passing them to scipy.optimize.nnls().
 
     :param np.ndarray w_matrix: The sensitivity matrix describing the coupling between the
@@ -35,10 +36,10 @@ def invert_regularised_nnls(
     """
 
 def invert_sparse_regularised_nnls(
-    w_matrix: NDArray[np.floating],
+    w_matrix: NDArray[np.floating] | sparray,
     b_vector: NDArray[np.floating],
     alpha: float = 0.01,
-    tikhonov_matrix: NDArray[np.floating] | None = None,
+    tikhonov_matrix: NDArray[np.floating] | sparray | None = None,
     **kwargs: object,
 ) -> tuple[NDArray[np.float64], float]:
     r"""

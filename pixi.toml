@@ -23,6 +23,7 @@ hatch-vcs = "*"
 [package.run-dependencies]
 numpy = "*"
 raysect-stubs = ">=0.9.1,<0.10.0"
+scipy-stubs = "*"
 typing-extensions = { version = ">=4.6", when = "python <3.12" }
 
 [package.run-constraints]
@@ -38,6 +39,9 @@ ipython = ">=8.37.0,<10"
 
 [pypi-dependencies]
 cherab-stubs = { path = ".", editable = false }
+
+[dev]
+cherab-stubs = { path = "." }
 
 [tasks]
 type-check = "mypy --strict --no-incremental -p cherab"

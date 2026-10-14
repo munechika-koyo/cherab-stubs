@@ -1,9 +1,10 @@
 from collections.abc import Iterable, Iterator
 
 from raysect.core.math.function.vector3d import Function3D as VectorFunction3D
+from raysect.core.math.function.vector3d.function3d.base import _VectorOperand3D
 from raysect.core.scenegraph import Node, Primitive
 from raysect.core.scenegraph._nodebase import _NodeBase
-from raysect.optical import AffineMatrix3D, Vector3D
+from raysect.optical import AffineMatrix3D
 from raysect.optical.material.emitter import VolumeIntegrator
 
 from ..atomic import AtomicData
@@ -236,14 +237,6 @@ class Plasma(Node):
     """
 
     notifier: Notifier
-    _b_field: VectorFunction3D
-    _electrin_distribution: DistributionFunction
-    _composition: Composition
-    _atomic_data: AtomicData
-    _geometry: Primitive
-    _geometry_transform: AffineMatrix3D
-    _integrator: VolumeIntegrator
-    _models: ModelManager
 
     def __init__(
         self,
@@ -255,11 +248,11 @@ class Plasma(Node):
     @property
     def b_field(self) -> VectorFunction3D: ...
     @b_field.setter
-    def b_field(self, value: VectorFunction3D | Vector3D) -> None: ...
+    def b_field(self, value: _VectorOperand3D | None) -> None: ...
     @property
     def e_field(self) -> VectorFunction3D: ...
     @e_field.setter
-    def e_field(self, value: VectorFunction3D | Vector3D) -> None: ...
+    def e_field(self, value: _VectorOperand3D | None) -> None: ...
     @property
     def electron_distribution(self) -> DistributionFunction: ...
     @electron_distribution.setter

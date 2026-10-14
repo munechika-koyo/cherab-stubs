@@ -19,7 +19,7 @@ class Integrator2D:
 
     @integrand.setter
     def integrand(self, func: float | Function2D | Callable[[float, float], float]) -> None: ...
-    def __call__(self, x_lower: float, x_upper: float, y_lower: Function1D, y_upper: Function1D):
+    def __call__(self, x_lower: float, x_upper: float, y_lower: Function1D, y_upper: Function1D) -> float:
         """
         Integrates a two-dimensional function over a finite interval.
 
@@ -73,7 +73,7 @@ class GaussianQuadrature2D(Integrator2D):
     :param int y_max_order: Maximum order on Gaussian quadrature in the y dimension the integration stops at. Default is `50`.
     :param int y_min_order: Minimum order on Gaussian quadrature in the y dimension the integration starts from. Default is `1`.
 
-    :ivar Function1D integrand: A 1D function to integrate.
+    :ivar Function2D integrand: A 2D function to integrate.
     :ivar double relative_tolerance: Iteration stops when relative error between
         last two iterates is less than this value.
     :ivar int x_max_order: Maximum order on Gaussian quadrature in the x dimension the integration stops at.

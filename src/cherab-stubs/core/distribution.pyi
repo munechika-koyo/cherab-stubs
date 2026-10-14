@@ -2,9 +2,12 @@ from abc import abstractmethod
 
 from raysect.core.math import Vector3D
 from raysect.core.math.function.float import Function3D
+from raysect.core.math.function.float.function3d.cmath import _Function3DInput
 from raysect.core.math.function.vector3d import Function3D as VectorFunction3D
+from raysect.core.math.function.vector3d.function3d.base import _VectorOperand3D
 
 from .math.function.float import Function6D
+from .math.function.float.function6d.cmath import _Function6DInput
 
 class DistributionFunction:
     """
@@ -243,10 +246,10 @@ class GenericDistribution(DistributionFunction):
 
     def __init__(
         self,
-        phase_space_density: Function6D,
-        density: Function3D,
-        temperature: Function3D,
-        velocity: VectorFunction3D,
+        phase_space_density: _Function6DInput,
+        density: _Function3DInput,
+        temperature: _Function3DInput,
+        velocity: _VectorOperand3D,
     ) -> None: ...
     def bulk_velocity(self, x: float, y: float, z: float) -> Vector3D:
         """
