@@ -88,12 +88,12 @@ class Function6D(FloatFunction):
     @overload
     def __rpow__(self, other: float, modulo: None = None, /) -> PowScalarFunction6D: ...
     def __abs__(self) -> AbsFunction6D: ...
-    @overload
-    def __eq__(self, other: Function6D | _Function6DCallable, /) -> EqualsFunction6D: ...  # pyrefly: ignore [bad-override]
+    @overload  # type: ignore[override]
+    def __eq__(self, other: Function6D | _Function6DCallable, /) -> EqualsFunction6D: ...  # type: ignore[override]
     @overload
     def __eq__(self, other: float, /) -> EqualsScalar6D: ...
-    @overload
-    def __ne__(self, other: Function6D | _Function6DCallable, /) -> NotEqualsFunction6D: ...  # pyrefly: ignore [bad-override]
+    @overload  # type: ignore[override]
+    def __ne__(self, other: Function6D | _Function6DCallable, /) -> NotEqualsFunction6D: ...  # type: ignore[override]
     @overload
     def __ne__(self, other: float, /) -> NotEqualsScalar6D: ...
     @overload
