@@ -21,5 +21,5 @@ cherab\.openadas\.rates\.cx\.NullBeamCXPEC\.__init__
 # Implementation-only private names. Documented subclass hooks remain covered by regression tests.
 cherab(\.\w+)*\._(?!_)\w+(\.\w+)*
 
-# Optional/helper modules that are not importable in the supported runtime wheel.
-cherab\.core\.math\.caching\.utility
+# Uppercase module-level constants in the Generomak bolometer implementation.
+cherab\.generomak\.diagnostics\.bolometers\.[A-Z][A-Z0-9_]*

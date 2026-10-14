@@ -14,6 +14,8 @@ from raysect.core.math.function.vector3d import Function3D as _VectorFunction3D
 from raysect.core.math.function.vector3d.function2d import FloatToVector3DFunction2D
 from raysect.core.math.function.vector3d.function3d import FloatToVector3DFunction3D
 
+from . import float
+
 ScalarToVectorFunction2D = FloatToVector3DFunction2D
 ScalarToVectorFunction3D = FloatToVector3DFunction3D
 ConstantVector2D = _ConstantVector2D

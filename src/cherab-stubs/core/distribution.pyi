@@ -2,7 +2,12 @@ from abc import abstractmethod
 
 from raysect.core.math import Vector3D
 from raysect.core.math.function.float import Function3D
+from raysect.core.math.function.float.function3d.cmath import _Function3DInput
 from raysect.core.math.function.vector3d import Function3D as VectorFunction3D
+from raysect.core.math.function.vector3d.function3d.base import _VectorOperand3D
+
+from .math.function.float import Function6D
+from .math.function.float.function6d.cmath import _Function6DInput
 
 class DistributionFunction:
     """
@@ -197,6 +202,93 @@ class Maxwellian(DistributionFunction):
         :param y: position in meters
         :param z: position in meters
         :return: density in m^-3
+
+        .. code-block:: pycon
+
+           >>> d0_distribution.density(1, 0, 0)
+           1e+17
+        """
+
+class GenericDistribution(DistributionFunction):
+    """
+    A generic distribution function.
+
+    This class implements a generic distribution function. The user supplies a 6D function
+    that provides the phase space density at a given point in 6D phase space,
+    a 3D function that provides the spatial density, a 3D function that provides the temperature,
+    and a 3D vector function that provides the bulk velocity.
+
+    .. warning::
+        The consistency of the provided functions is not checked and is the responsibility of the user.
+
+    :param Function6D phase_space_density: 6D function defining the phase space density in s³/m⁶.
+    :param Function3D density: 3D function defining the spatial density in m⁻³.
+    :param Function3D temperature: 3D function defining the temperature in eV.
+    :param VectorFunction3D velocity: 3D vector function defining the bulk velocity in meters per second.
+
+    .. code-block:: pycon
+
+       >>> from cherab.core import GenericDistribution
+       >>> from cherab.core.math import Function6D, Function3D, VectorFunction3D
+       >>>
+       >>> # Setup distribution for a slab of plasma in thermodynamic equilibrium
+       >>> phase_space_density = Function6D(lambda x, y, z, vx, vy, vz: 1E17 * exp(-(vx**2 + vy**2 + vz**2) / (2 * 1)))
+       >>> density = Function3D(lambda x, y, z: 1E17)
+       >>> temperature = Function3D(lambda x, y, z: 1)
+       >>> velocity = VectorFunction3D(lambda x, y, z: Vector3D(0, 0, 0))
+       >>> d0_distribution = GenericDistribution(phase_space_density, density, temperature, velocity)
+    """
+
+    _phase_space_density: Function6D
+    _density: Function3D
+    _temperature: Function3D
+    _velocity: VectorFunction3D
+
+    def __init__(
+        self,
+        phase_space_density: _Function6DInput,
+        density: _Function3DInput,
+        temperature: _Function3DInput,
+        velocity: _VectorOperand3D,
+    ) -> None: ...
+    def bulk_velocity(self, x: float, y: float, z: float) -> Vector3D:
+        """
+        Evaluates the species' bulk velocity at the specified 3D coordinate.
+
+        :param x: position in meters
+        :param y: position in meters
+        :param z: position in meters
+        :return: velocity vector in m/s
+
+        .. code-block:: pycon
+
+           >>> d0_distribution.bulk_velocity(1, 0, 0)
+           Vector3D(0.0, 0.0, 0.0)
+        """
+
+    def effective_temperature(self, x: float, y: float, z: float) -> float:
+        """
+
+        :param x: position in meters
+        :param y: position in meters
+        :param z: position in meters
+        :return: temperature in eV
+        :rtype: float
+
+        .. code-block:: pycon
+
+           >>> d0_distribution.effective_temperature(1, 0, 0)
+           1.0
+        """
+
+    def density(self, x: float, y: float, z: float) -> float:
+        """
+
+        :param x: position in meters
+        :param y: position in meters
+        :param z: position in meters
+        :return: density in m⁻³
+        :rtype: float
 
         .. code-block:: pycon
 

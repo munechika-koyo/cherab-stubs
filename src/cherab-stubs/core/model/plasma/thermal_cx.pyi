@@ -34,6 +34,8 @@ class ThermalCXLine(PlasmaModel):
 
     :ivar Plasma plasma: The plasma to which this emission model is attached.
     :ivar AtomicData atomic_data: The atomic data provider for this model.
+    :ivar Line line: The emission line object.
+    :ivar LineShapeModel lineshape: The line shape model.
     """
 
     def __init__(
@@ -45,5 +47,9 @@ class ThermalCXLine(PlasmaModel):
         lineshape_args: Sequence[object] | None = None,
         lineshape_kwargs: Mapping[str, object] | None = None,
     ) -> None: ...
+    @property
+    def line(self) -> Line: ...
+    @property
+    def lineshape(self) -> LineShapeModel | None: ...
     def emission(self, point: Point3D, direction: Vector3D, spectrum: Spectrum) -> Spectrum: ...
     def _change(self) -> None: ...

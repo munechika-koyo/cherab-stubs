@@ -16,17 +16,18 @@ backend = { name = "pixi-build-python", version = "*" }
 noarch = true
 
 [package.host-dependencies]
-python = ">=3.10"
+python = "*"
 hatchling = "*"
 hatch-vcs = "*"
 
 [package.run-dependencies]
 numpy = "*"
 raysect-stubs = ">=0.9.1,<0.10.0"
+scipy-stubs = "*"
 typing-extensions = { version = ">=4.6", when = "python <3.12" }
 
 [package.run-constraints]
-cherab = ">=1.5.0,<1.6.0"
+cherab = ">=1.6.0,<1.7.0"
 
 # ---------------------------------
 # === Development Configuration ===
@@ -38,6 +39,9 @@ ipython = ">=8.37.0,<10"
 
 [pypi-dependencies]
 cherab-stubs = { path = ".", editable = false }
+
+[dev]
+cherab-stubs = { path = "." }
 
 [tasks]
 type-check = "mypy --strict --no-incremental -p cherab"
@@ -134,7 +138,7 @@ build-sdist = { cmd = "python -m build -nx -s", description = "🔧 Build source
 
 # === Python environment features ===
 [feature.py-oldest.dependencies]
-python = "3.10.*"
+python = "3.11.*"
 
 [feature.py-latest.dependencies]
 python = "3.14.*"

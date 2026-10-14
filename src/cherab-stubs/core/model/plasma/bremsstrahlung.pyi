@@ -61,7 +61,7 @@ class Bremsstrahlung(PlasmaModel):
                                             wavelength. If not provided,
                                             the `atomic_data` is used.
     :ivar Integrator1D integrator: Integrator1D instance to integrate Bremsstrahlung radiation
-                                   over the spectral bin. Default is `GaussianQuadrature`.
+                                   over the spectral bin. Default is `GaussianQuadrature1D`.
     """
     def __init__(
         self,

@@ -117,7 +117,7 @@ class StarkBroadenedLine(ZeemanLineShapeModel):
                                            Default is None (will use
                                            `atomic_data.stark_model_coefficients`).
     :param Integrator1D integrator: Integrator1D instance to integrate the line shape
-        over the spectral bin. Default is `GaussianQuadrature()`.
+        over the spectral bin. Default is `GaussianQuadrature1D()`.
     :param str polarisation: Leaves only :math:`\pi`-/:math:`\sigma`-polarised components:
                              "pi" - leave only :math:`\pi`-polarised components,
                              "sigma" - leave only :math:`\sigma`-polarised components,
