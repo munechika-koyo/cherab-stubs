@@ -173,6 +173,8 @@ class Plasma(Node):
       All plasma emission from this plasma will be calculated with the same provider.
     :ivar VectorFunction3D b_field: A vector function in 3D space that returns the
       magnetic field vector at any requested point.
+    :ivar VectorFunction3D e_field: A vector function in 3D space that returns the
+      electric field vector at any requested point.
     :ivar Composition composition: The composition object manages all the atomic plasma
       species and provides access to their distribution functions.
     :ivar DistributionFunction electron_distribution: A distribution function object
@@ -254,6 +256,10 @@ class Plasma(Node):
     def b_field(self) -> VectorFunction3D: ...
     @b_field.setter
     def b_field(self, value: VectorFunction3D | Vector3D) -> None: ...
+    @property
+    def e_field(self) -> VectorFunction3D: ...
+    @e_field.setter
+    def e_field(self, value: VectorFunction3D | Vector3D) -> None: ...
     @property
     def electron_distribution(self) -> DistributionFunction: ...
     @electron_distribution.setter
