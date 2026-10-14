@@ -1,1 +1,14 @@
-# Constants in this Cython module are C-only and are not exposed to Python.
+RECIP_2_PI: float
+RECIP_4_PI: float
+DEGREES_TO_RADIANS: float
+RADIANS_TO_DEGREES: float
+ATOMIC_MASS: float
+ELEMENTARY_CHARGE: float
+SPEED_OF_LIGHT: float
+PLANCK_CONSTANT: float
+HC_EV_NM: float
+ELECTRON_CLASSICAL_RADIUS: float
+ELECTRON_REST_MASS: float
+RYDBERG_CONSTANT_EV: float
+VACUUM_PERMITTIVITY: float
+BOHR_MAGNETON: float
